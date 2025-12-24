@@ -3,260 +3,290 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Digital resources and toolkits. Payhip checkout and instant delivery." />
-  <title>GPVS360 | Digital Toolkits</title>
-
-  <!-- Payhip buy buttons -->
-  <script defer src="https://payhip.com/payhip.js"></script>
-
-  <style>
-    :root{
-      --bg:#ffffff;
-      --text:#111111;
-      --muted:#333333;
-      --border:#111111;
-      --card:#f6f6f6;
-      --focus:#111111;
-      --max: 980px;
-    }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-size: 22px;
-      line-height: 1.55;
-    }
-    a{ color:inherit; }
-    a:focus, button:focus{ outline: 4px solid var(--focus); outline-offset: 4px; }
-    .skip{
-      position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
-    }
-    .skip:focus{
-      position:static; width:auto; height:auto; padding:12px 16px; display:inline-block;
-      border:3px solid var(--border); background:var(--card);
-      margin: 12px;
-    }
-    header, main, footer{ display:block; }
-    .wrap{ max-width: var(--max); margin: 0 auto; padding: 20px; }
-    .topbar{
-      display:flex; gap:14px; align-items:center; justify-content:space-between;
-      border-bottom: 2px solid var(--border);
-      padding: 14px 0;
-    }
-    .brand{ font-weight: 900; letter-spacing: 0.2px; }
-    nav a{ margin-right: 14px; text-decoration: underline; }
-    nav a:last-child{ margin-right: 0; }
-    .hero{
-      padding: 24px 0 10px;
-    }
-    .hero h1{
-      margin: 0 0 10px 0;
-      font-size: 40px;
-      line-height: 1.15;
-    }
-    .hero p{ margin: 0 0 16px 0; color: var(--muted); }
-    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin: 14px 0 0 0; }
-    .btn{
-      display:inline-block;
-      padding: 14px 18px;
-      border: 3px solid var(--border);
-      border-radius: 12px;
-      font-weight: 900;
-      text-decoration: none;
-      background: var(--bg);
-      cursor: pointer;
-    }
-    .btn.primary{
-      background: var(--text);
-      color: var(--bg);
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
-      margin: 18px 0 0 0;
-    }
-    .card{
-      background: var(--card);
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-    }
-    .card h2{
-      margin: 0 0 8px 0;
-      font-size: 26px;
-      line-height: 1.2;
-    }
-    .card ul{ margin: 10px 0 14px 22px; }
-    .card li{ margin: 6px 0; }
-    .section{
-      padding: 22px 0;
-      border-top: 2px solid var(--border);
-      margin-top: 22px;
-    }
-    .section h2{
-      margin: 0 0 10px 0;
-      font-size: 30px;
-    }
-    .small{ font-size: 18px; color: var(--muted); }
-    .pill{
-      display:inline-block;
-      border:2px solid var(--border);
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-weight: 800;
-      background: var(--bg);
-      margin: 6px 6px 0 0;
-    }
-    footer{
-      border-top: 2px solid var(--border);
-      margin-top: 22px;
-      padding: 18px 0 30px;
-    }
-    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-  </style>
+  <title>The Vault, TVI Toolkit</title>
+  <meta name="description" content="The Vault helps TVIs write legally compliant IEPs in minutes with ECC-aligned SMART goals, PLAAFP templates, and service justification scripts." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <a class="skip" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header>
-    <div class="wrap">
-      <div class="topbar">
-        <div class="brand">GPVS360</div>
-        <nav aria-label="Primary">
-          <a href="#offers">Offers</a>
-          <a href="#who">Who it’s for</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Contact</a>
-        </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <!-- Optional logo -->
+        <!-- <img src="assets/logo-vault-tvi-toolkit.png" alt="The Vault TVI Toolkit" class="logo" /> -->
+        <span class="brand-name">The Vault, TVI Toolkit</span>
+        <span class="brand-tagline">Built by a TVI, for TVIs.</span>
       </div>
 
-      <div class="hero">
-        <h1>Digital toolkits that save you time and reduce mistakes.</h1>
-        <p>Fast checkout and instant delivery through Payhip.</p>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#inside">What’s Inside</a>
+        <a href="#formats">Formats</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
 
-        <div class="cta-row">
-          <a class="btn primary" href="#offers">See offers</a>
-          <!-- Optional: link to your Payhip storefront page -->
-          <a class="btn" href="https://YOURDOMAIN.com">Open shop</a>
-        </div>
-
-        <div class="small" style="margin-top:12px;">
-          Replace <span class="mono">YOURDOMAIN.com</span> with your current Payhip domain, or remove the shop link.
-        </div>
+      <div class="header-cta">
+        <a class="btn btn-primary" href="[PAYHIP_PRO_BUNDLE_URL]" target="_blank" rel="noopener">
+          Get the Pro Bundle ($147)
+        </a>
       </div>
     </div>
   </header>
 
   <main id="main">
-    <div class="wrap">
+    <!-- HERO -->
+    <section class="section hero" aria-labelledby="hero-title">
+      <div class="container grid-2">
+        <div>
+          <h1 id="hero-title">Write legally compliant IEPs in minutes.</h1>
+          <p class="lead">
+            The Vault helps TVIs write legally compliant IEPs fast, without spending hours searching for SMART goals and ECC-aligned present levels.
+          </p>
 
-      <section id="offers" class="section" aria-label="Offers">
-        <h2>Offers</h2>
-        <p class="small">These buttons use Payhip checkout. Replace the product codes below.</p>
+          <ul class="checklist">
+            <li>540+ ECC-aligned SMART goals, ready to customize</li>
+            <li>PLAAFP templates with clean legal language</li>
+            <li>Google Sheets, PDF, Word, and accessible TXT formats</li>
+          </ul>
 
-        <div class="grid">
-          <div class="card">
-            <h2>Offer 1: Toolkit</h2>
-            <div class="pill">Instant download</div>
-            <div class="pill">Editable templates</div>
-
-            <ul>
-              <li>Outcome-focused templates</li>
-              <li>Checklists and workflows</li>
-              <li>Clean, printable format</li>
-            </ul>
-
-            <!-- Payhip Buy Button -->
-            <!-- Replace PRODUCTCODE1 with your Payhip product code, example: RGsF -->
-            <a class="btn primary payhip-buy-button"
-               href="https://payhip.com/b/PRODUCTCODE1"
-               data-product="PRODUCTCODE1"
-               data-theme="none">
-              Buy Offer 1
+          <div class="cta-row">
+            <a class="btn btn-primary" href="[PAYHIP_PRO_BUNDLE_URL]" target="_blank" rel="noopener">
+              Get TVI Toolkit v1.3 Pro Bundle
             </a>
-
-            <p class="small" style="margin-top:10px;">
-              Product code lives in your Payhip product URL, like <span class="mono">/b/RGsF</span>.
-            </p>
-          </div>
-
-          <div class="card">
-            <h2>Offer 2: Mini Pack</h2>
-            <div class="pill">Quick win</div>
-            <div class="pill">Low cost</div>
-
-            <ul>
-              <li>One problem, one solution</li>
-              <li>Fast to implement</li>
-              <li>Great starting point</li>
-            </ul>
-
-            <!-- Payhip Buy Button -->
-            <!-- Replace PRODUCTCODE2 with your Payhip product code -->
-            <a class="btn payhip-buy-button"
-               href="https://payhip.com/b/PRODUCTCODE2"
-               data-product="PRODUCTCODE2"
-               data-theme="none">
-              Buy Offer 2
+            <a class="btn btn-secondary" href="[PAYHIP_LEAD_MAGNET_URL]" target="_blank" rel="noopener">
+              Free checklist
             </a>
           </div>
 
-          <div class="card">
-            <h2>Need the full shop?</h2>
-            <p>Keep your store on Payhip. Use this page as your clean, low-vision friendly homepage.</p>
-            <a class="btn" href="https://YOURDOMAIN.com">Go to shop</a>
-          </div>
+          <p class="note">
+            No subscriptions required. This is a standalone toolkit.
+          </p>
         </div>
-      </section>
 
-      <section id="who" class="section" aria-label="Who it is for">
-        <h2>Who it’s for</h2>
-        <ul>
-          <li>Parents navigating special education</li>
-          <li>TVIs, COMS, and related educators</li>
-          <li>Teams that need clear, repeatable documentation</li>
+        <div class="hero-media" aria-label="Product preview">
+          <img
+            src="assets/mockup-tvi-toolkit-pro.png"
+            alt="TVI Toolkit Pro Bundle preview mockup"
+            loading="lazy"
+            width="1200"
+            height="1200"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="section alt" aria-labelledby="problem-title">
+      <div class="container">
+        <h2 id="problem-title">You know what good looks like. You do not have time to rebuild it every time.</h2>
+        <ul class="bullets">
+          <li>You hunt for goals and rewrite them anyway.</li>
+          <li>You draft PLAAFPs with inconsistent language across cases.</li>
+          <li>You spend more time formatting than planning instruction.</li>
+          <li>You worry about compliance reviews when documentation gets thin.</li>
         </ul>
-      </section>
+      </div>
+    </section>
 
-      <section id="faq" class="section" aria-label="Frequently asked questions">
-        <h2>FAQ</h2>
+    <!-- SOLUTION -->
+    <section class="section" aria-labelledby="solution-title">
+      <div class="container">
+        <h2 id="solution-title">The Vault gives you a ready-to-use toolkit built for real TVI workflow.</h2>
+        <p>
+          Start with strong templates, then customize for the student, services, and data you have.
+        </p>
 
-        <div class="card">
-          <p><strong>How do I get the files?</strong><br />
-            Payhip delivers your download link after checkout.
-          </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Stop writing from a blank page</h3>
+            <p>Use structured goals and PLAAFP language as your baseline, then tailor fast.</p>
+          </article>
+          <article class="card">
+            <h3>Document services with clarity</h3>
+            <p>Use service justification scripts for direct vs consult minutes.</p>
+          </article>
+          <article class="card">
+            <h3>Standardize without sounding robotic</h3>
+            <p>Stay consistent across students while preserving professional judgment.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <p><strong>Can I use this on iPad and iPhone?</strong><br />
-            Yes, downloads work on mobile. Use Files app to save and organize.
-          </p>
+    <!-- WHAT'S INSIDE -->
+    <section id="inside" class="section alt" aria-labelledby="inside-title">
+      <div class="container">
+        <h2 id="inside-title">What’s inside the Pro Bundle</h2>
 
-          <p><strong>Refunds?</strong><br />
-            Add your real policy here.
+        <div class="icon-grid">
+          <div class="icon-card">
+            <div class="icon-holder" aria-hidden="true">●</div>
+            <h3>TVI Goal Bank</h3>
+            <p>540+ SMART goals across all 9 ECC areas.</p>
+          </div>
+
+          <div class="icon-card">
+            <div class="icon-holder" aria-hidden="true">●</div>
+            <h3>PLAAFP Power Packs</h3>
+            <p>Present level templates with legal language.</p>
+          </div>
+
+          <div class="icon-card">
+            <div class="icon-holder" aria-hidden="true">●</div>
+            <h3>Service Justification Scripts</h3>
+            <p>Documentation for direct vs consult minutes.</p>
+          </div>
+
+          <div class="icon-card">
+            <div class="icon-holder" aria-hidden="true">●</div>
+            <h3>O&amp;M Assessment Framework</h3>
+            <p>Complete evaluation toolkit.</p>
+          </div>
+
+          <div class="icon-card">
+            <div class="icon-holder" aria-hidden="true">●</div>
+            <h3>IEP Meeting Command Guide</h3>
+            <p>Prep and communication scripts.</p>
+          </div>
+
+          <div class="icon-card">
+            <div class="icon-holder" aria-hidden="true">●</div>
+            <h3>ECC Supplemental Goals</h3>
+            <p>Extra goal options beyond core areas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMATS -->
+    <section id="formats" class="section" aria-labelledby="formats-title">
+      <div class="container">
+        <h2 id="formats-title">Formats and accessibility</h2>
+        <p>You get the toolkit in formats you can actually use in real meetings.</p>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Google Sheets</h3>
+            <p>Searchable, filterable, customizable.</p>
+          </article>
+          <article class="card">
+            <h3>PDF</h3>
+            <p>Print-ready for meetings.</p>
+          </article>
+          <article class="card">
+            <h3>Word docs</h3>
+            <p>Full editing capability.</p>
+          </article>
+          <article class="card">
+            <h3>Accessible TXT</h3>
+            <p>Screen reader compatible.</p>
+          </article>
+        </div>
+
+        <p class="note">
+          Accessibility goal: high contrast, large text, keyboard-friendly layout, descriptive links, and alt text for images.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROOF -->
+    <section class="section alt" aria-labelledby="proof-title">
+      <div class="container">
+        <h2 id="proof-title">Built by a multi-certified vision professional</h2>
+
+        <div class="proof">
+          <p><strong>Certifications:</strong> TVI, COMS, CATIS, CVRT</p>
+          <p><strong>Experience:</strong> 12+ years across early intervention, K–12, residential rehabilitation, and VA Blind Rehabilitation</p>
+          <p><strong>Leadership:</strong> President-elect for MAER 2025</p>
+          <p class="note"><strong>Pre-launch note:</strong> No customer testimonials yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <h2 id="pricing-title">Get the toolkit</h2>
+
+        <div class="price-box" role="region" aria-label="Pricing options">
+          <div class="price-main">
+            <p class="price-label">TVI Toolkit v1.3 Pro Bundle</p>
+            <p class="price">$147</p>
+            <p class="small">Individual products: $27–$47 each</p>
+            <p class="small">Estimated savings: $488–$878 vs buying separately (use only if verified)</p>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="[PAYHIP_PRO_BUNDLE_URL]" target="_blank" rel="noopener">
+              Buy the Pro Bundle
+            </a>
+            <a class="btn btn-secondary" href="[PAYHIP_LEAD_MAGNET_URL]" target="_blank" rel="noopener">
+              Free checklist
+            </a>
+          </div>
+
+          <p class="note">
+            Membership access: [PLACEHOLDER: Coming soon, add your real launch date].
           </p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="contact" class="section" aria-label="Contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:YOUR@EMAIL.com">YOUR@EMAIL.com</a></p>
-        <p class="small">Replace the email address before publishing.</p>
-      </section>
+    <!-- FAQ -->
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <div class="container">
+        <h2 id="faq-title">FAQ</h2>
 
-    </div>
+        <div class="faq">
+          <details>
+            <summary>Is this legally compliant with IDEA requirements in my state?</summary>
+            <p>This toolkit uses IDEA-aligned structure and language. You still customize for your state guidance and district forms. Use it as a strong starting point, not a substitute for professional judgment.</p>
+          </details>
+
+          <details>
+            <summary>Can I customize the goals for my specific students?</summary>
+            <p>Yes. Edit goals and criteria in Word and Google Sheets, then tailor to evaluation data and present levels.</p>
+          </details>
+
+          <details>
+            <summary>What formats do I get, PDF, Google Sheets, or Word?</summary>
+            <p>You get Google Sheets, PDF, Word, and accessible TXT.</p>
+          </details>
+
+          <details>
+            <summary>Do I need ChatGPT Plus or any subscriptions to use this?</summary>
+            <p>No. This is a standalone toolkit. No AI subscriptions required.</p>
+          </details>
+
+          <details>
+            <summary>What’s your refund policy?</summary>
+            <p>See the Refund Policy page: <a href="[REFUND_POLICY_URL]" target="_blank" rel="noopener">Read the refund policy</a>.</p>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="wrap">
-      <div class="small">© <span id="y"></span> GPVS360. All rights reserved.</div>
+  <footer class="site-footer" aria-label="Footer">
+    <div class="container footer-inner">
+      <p><strong>Built by a TVI, for TVIs.</strong></p>
+
+      <ul class="footer-links">
+        <li><a href="mailto:garrett@thevaultresources.com">garrett@thevaultresources.com</a></li>
+        <li><a href="[REFUND_POLICY_URL]" target="_blank" rel="noopener">Refund Policy</a></li>
+        <li><a href="[TERMS_URL]" target="_blank" rel="noopener">Terms of Service</a></li>
+        <li><a href="[ACCESSIBILITY_STATEMENT_URL]" target="_blank" rel="noopener">Accessibility Statement</a></li>
+      </ul>
+
+      <p class="small">© <span id="year">2025</span> The Vault TVI Toolkit</p>
     </div>
   </footer>
 
   <script>
-    document.getElementById("y").textContent = String(new Date().getFullYear());
+    // Optional tiny JS to keep the footer year current.
+    document.getElementById("year").textContent = String(new Date().getFullYear());
   </script>
 </body>
 </html>
