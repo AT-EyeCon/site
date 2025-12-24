@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Digital resources and toolkits. Payhip checkout and instant delivery." />
+  <title>GPVS360 | Digital Toolkits</title>
+
+  <!-- Payhip buy buttons -->
+  <script defer src="https://payhip.com/payhip.js"></script>
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111111;
+      --muted:#333333;
+      --border:#111111;
+      --card:#f6f6f6;
+      --focus:#111111;
+      --max: 980px;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size: 22px;
+      line-height: 1.55;
+    }
+    a{ color:inherit; }
+    a:focus, button:focus{ outline: 4px solid var(--focus); outline-offset: 4px; }
+    .skip{
+      position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip:focus{
+      position:static; width:auto; height:auto; padding:12px 16px; display:inline-block;
+      border:3px solid var(--border); background:var(--card);
+      margin: 12px;
+    }
+    header, main, footer{ display:block; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 20px; }
+    .topbar{
+      display:flex; gap:14px; align-items:center; justify-content:space-between;
+      border-bottom: 2px solid var(--border);
+      padding: 14px 0;
+    }
+    .brand{ font-weight: 900; letter-spacing: 0.2px; }
+    nav a{ margin-right: 14px; text-decoration: underline; }
+    nav a:last-child{ margin-right: 0; }
+    .hero{
+      padding: 24px 0 10px;
+    }
+    .hero h1{
+      margin: 0 0 10px 0;
+      font-size: 40px;
+      line-height: 1.15;
+    }
+    .hero p{ margin: 0 0 16px 0; color: var(--muted); }
+    .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin: 14px 0 0 0; }
+    .btn{
+      display:inline-block;
+      padding: 14px 18px;
+      border: 3px solid var(--border);
+      border-radius: 12px;
+      font-weight: 900;
+      text-decoration: none;
+      background: var(--bg);
+      cursor: pointer;
+    }
+    .btn.primary{
+      background: var(--text);
+      color: var(--bg);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin: 18px 0 0 0;
+    }
+    .card{
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .card h2{
+      margin: 0 0 8px 0;
+      font-size: 26px;
+      line-height: 1.2;
+    }
+    .card ul{ margin: 10px 0 14px 22px; }
+    .card li{ margin: 6px 0; }
+    .section{
+      padding: 22px 0;
+      border-top: 2px solid var(--border);
+      margin-top: 22px;
+    }
+    .section h2{
+      margin: 0 0 10px 0;
+      font-size: 30px;
+    }
+    .small{ font-size: 18px; color: var(--muted); }
+    .pill{
+      display:inline-block;
+      border:2px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-weight: 800;
+      background: var(--bg);
+      margin: 6px 6px 0 0;
+    }
+    footer{
+      border-top: 2px solid var(--border);
+      margin-top: 22px;
+      padding: 18px 0 30px;
+    }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">GPVS360</div>
+        <nav aria-label="Primary">
+          <a href="#offers">Offers</a>
+          <a href="#who">Who it’s for</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+
+      <div class="hero">
+        <h1>Digital toolkits that save you time and reduce mistakes.</h1>
+        <p>Fast checkout and instant delivery through Payhip.</p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#offers">See offers</a>
+          <!-- Optional: link to your Payhip storefront page -->
+          <a class="btn" href="https://YOURDOMAIN.com">Open shop</a>
+        </div>
+
+        <div class="small" style="margin-top:12px;">
+          Replace <span class="mono">YOURDOMAIN.com</span> with your current Payhip domain, or remove the shop link.
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+
+      <section id="offers" class="section" aria-label="Offers">
+        <h2>Offers</h2>
+        <p class="small">These buttons use Payhip checkout. Replace the product codes below.</p>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Offer 1: Toolkit</h2>
+            <div class="pill">Instant download</div>
+            <div class="pill">Editable templates</div>
+
+            <ul>
+              <li>Outcome-focused templates</li>
+              <li>Checklists and workflows</li>
+              <li>Clean, printable format</li>
+            </ul>
+
+            <!-- Payhip Buy Button -->
+            <!-- Replace PRODUCTCODE1 with your Payhip product code, example: RGsF -->
+            <a class="btn primary payhip-buy-button"
+               href="https://payhip.com/b/PRODUCTCODE1"
+               data-product="PRODUCTCODE1"
+               data-theme="none">
+              Buy Offer 1
+            </a>
+
+            <p class="small" style="margin-top:10px;">
+              Product code lives in your Payhip product URL, like <span class="mono">/b/RGsF</span>.
+            </p>
+          </div>
+
+          <div class="card">
+            <h2>Offer 2: Mini Pack</h2>
+            <div class="pill">Quick win</div>
+            <div class="pill">Low cost</div>
+
+            <ul>
+              <li>One problem, one solution</li>
+              <li>Fast to implement</li>
+              <li>Great starting point</li>
+            </ul>
+
+            <!-- Payhip Buy Button -->
+            <!-- Replace PRODUCTCODE2 with your Payhip product code -->
+            <a class="btn payhip-buy-button"
+               href="https://payhip.com/b/PRODUCTCODE2"
+               data-product="PRODUCTCODE2"
+               data-theme="none">
+              Buy Offer 2
+            </a>
+          </div>
+
+          <div class="card">
+            <h2>Need the full shop?</h2>
+            <p>Keep your store on Payhip. Use this page as your clean, low-vision friendly homepage.</p>
+            <a class="btn" href="https://YOURDOMAIN.com">Go to shop</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="who" class="section" aria-label="Who it is for">
+        <h2>Who it’s for</h2>
+        <ul>
+          <li>Parents navigating special education</li>
+          <li>TVIs, COMS, and related educators</li>
+          <li>Teams that need clear, repeatable documentation</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-label="Frequently asked questions">
+        <h2>FAQ</h2>
+
+        <div class="card">
+          <p><strong>How do I get the files?</strong><br />
+            Payhip delivers your download link after checkout.
+          </p>
+
+          <p><strong>Can I use this on iPad and iPhone?</strong><br />
+            Yes, downloads work on mobile. Use Files app to save and organize.
+          </p>
+
+          <p><strong>Refunds?</strong><br />
+            Add your real policy here.
+          </p>
+        </div>
+      </section>
+
+      <section id="contact" class="section" aria-label="Contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:YOUR@EMAIL.com">YOUR@EMAIL.com</a></p>
+        <p class="small">Replace the email address before publishing.</p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="small">© <span id="y"></span> GPVS360. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>
