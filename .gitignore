@@ -1,0 +1,9 @@
+# Never commit ROMs, patches built from them, emulator binaries, or build output
+*.sfc
+*.smc
+*.zip
+*.so
+build/
+out/
+__pycache__/
+*.pyc
