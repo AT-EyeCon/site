@@ -68,3 +68,15 @@ def compose(rom, gfx, pose, power, extra=None):
     for px, xo, yo in reversed(order):   # OAM: earlier entries are drawn on top
         paste(px, OX + xo, OY + yo)
     return img
+
+def shoe_fix(rows, r_from=0, shoe='7'):
+    """Brown (3) pixels with no skin/glove (1, 6, E) in their 8-neighbourhood are shoe leather -> pink.
+    Brown touching skin is the skin outline (chin, hands) and is kept."""
+    g = [list(r) for r in rows]; out = [r[:] for r in g]
+    for y in range(r_from, 16):
+        for x in range(16):
+            if g[y][x] != '3': continue
+            nb = [g[y + dy][x + dx] for dx in (-1, 0, 1) for dy in (-1, 0, 1)
+                  if 0 <= x + dx < 16 and 0 <= y + dy < 16 and (dx or dy)]
+            if not any(c in '16E' for c in nb): out[y][x] = shoe
+    return [''.join(r) for r in out]

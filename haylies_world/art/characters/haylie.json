@@ -4,48 +4,93 @@
  "_note": "Player palette rows for CGRAM $86-$8F (index 6..F). Shared indices 1-5 are fixed by the game (1 white, 2 black, 3 brown = hair, 4/5 gold).",
  "palette_roles": {
   "6": "skin",
-  "7": "hot pink (glasses, shoes)",
-  "8": "cap shade",
-  "9": "cap highlight",
+  "7": "light pink: shoes, glasses, scrunchie",
+  "8": "cap/shirt shade",
+  "9": "cap/shirt highlight",
   "A": "overalls dark",
-  "B": "overalls",
-  "C": "shirt / overalls highlight",
-  "D": "cap main",
+  "B": "overalls shade",
+  "C": "overalls main",
+  "D": "cap/shirt main pink",
   "E": "skin shade",
-  "F": "buttons"
+  "F": "bib heart / cape"
  },
  "palettes": {
   "normal": [
-   "f8d0b0",
-   "f02890",
-   "981850",
-   "ff98c8",
-   "1c2c78",
-   "3a64c8",
-   "a8dcff",
-   "e84898",
-   "e09078",
-   "ffe860"
+   "ffd2ae",
+   "ff62b0",
+   "9c3368",
+   "ff8cc8",
+   "142c80",
+   "1e40b8",
+   "2650e8",
+   "f24fa2",
+   "e0a07c",
+   "ffa8d4"
   ],
   "fire": [
-   "f8d0b0",
-   "f02890",
-   "981850",
-   "ff98c8",
-   "801040",
-   "d8287c",
+   "ffd2ae",
+   "ff62b0",
+   "e8a0c4",
+   "ffffff",
+   "8c223c",
+   "c8306a",
+   "ff45a8",
    "fff0f8",
-   "f070b0",
-   "e09078",
-   "ffe860"
+   "e0a07c",
+   "ffa8d4"
   ]
  },
  "body_remap": {
-  "1": "6",
-  "D": "C",
-  "9": "1",
-  "8": "B",
-  "C": "B",
-  "B": "A"
+  "1": "6"
+ },
+ "shoes": "7",
+ "sp1_tiles": {
+  "0A": {
+   "3": "7",
+   "5": "7"
+  },
+  "0B": {
+   "3": "7",
+   "5": "7"
+  },
+  "1B": {
+   "3": "7",
+   "5": "7"
+  },
+  "22": {
+   "3": "7",
+   "5": "7"
+  },
+  "23": {
+   "3": "7",
+   "5": "7"
+  },
+  "32": {
+   "3": "7",
+   "5": "7"
+  },
+  "33": {
+   "3": "7",
+   "5": "7"
+  },
+  "0D": {
+   "1": "6"
+  },
+  "20": {
+   "1": "6"
+  },
+  "30": {
+   "1": "6"
+  },
+  "31": {
+   "1": "6"
+  },
+  "7E": {
+   "1": "6"
+  },
+  "1A": {
+   "1": "6",
+   "3": "7"
+  }
  }
 }

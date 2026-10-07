@@ -57,13 +57,24 @@ def build(phase, char_path, out):
             P.put_block(gfx, t, parse_block(blocks[t]))
         elif kind == 'body':
             px = P.block_pixels(gfx, t)
-            P.put_block(gfx, t, [[remap.get(v, v) for v in r] for r in px])
+            rows = [''.join(HEX[remap.get(v, v)] for v in r) for r in px]
+            if ch.get('shoes'): rows = P.shoe_fix(rows, 0, ch['shoes'])
+            P.put_block(gfx, t, parse_block(rows))
     for t, rows in blocks.items():
         if t not in cls: P.put_block(gfx, t, parse_block(rows))
     # extra raw 8x8 tiles inside GFX32 (cape/balloon pieces etc.) if provided
     art = load_art(os.path.join(artdir, 'blocks.py'))
     for t, rows in getattr(art, 'TILES8', {}).items():
         gfx[t * 32:t * 32 + 32] = g.encode_4bpp([[HEX.index(c) for c in r] for r in rows])
+    # player 8x8 pieces that live in GFX00 (SP1): shoe tips, hands, sleeves used by some poses
+    import ow
+    d0, n0 = lz2.decompress(rom, ow.GFX_PTR(rom, 0)); d0 = bytearray(d0)
+    for t, rule in ch.get('sp1_tiles', {}).items():
+        t = int(t, 16); px = g.decode_3bpp(d0, t)
+        m = {int(k): int(v) for k, v in rule.items()}
+        d0[t * 24:t * 24 + 24] = g.encode_3bpp([[m.get(v, v) for v in r] for r in px])
+    c0 = lz2.compress(d0); assert len(c0) <= n0, 'GFX00 grew'
+    rom[ow.GFX_PTR(rom, 0):ow.GFX_PTR(rom, 0) + len(c0)] = c0
     comp = lz2.compress(gfx)
     assert len(comp) <= P.GFX32_MAXLEN, 'GFX32 too big: %x' % len(comp)
     rom[P.GFX32_PC:P.GFX32_PC + len(comp)] = comp

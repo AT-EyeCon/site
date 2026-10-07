@@ -1,6 +1,6 @@
 """Haylie overworld (map) sprite: row substitutions applied to Mario's OW frames in GFX10,
 plus the OW palette (indices 1-7). 3 = brown hair/brim, 4 = pink cap/shirt/glasses."""
-OW_PALETTE = ['ffffff', '000000', '6b4020', 'e84898', '3a64c8', 'e09078', 'f8d0b0']
+OW_PALETTE = ['ffffff', '000000', '8a552c', 'f24fa2', '2650e8', 'e0a07c', 'ffd2ae']
 ROWS = {
     # front
     '..726126621627..': '..334124421433..',

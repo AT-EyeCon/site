@@ -21,6 +21,7 @@ def base(t, remap_from=16):
 
 def blk(t, remap_from=16, src=None, **rows):
     out = base(src if src is not None else t, remap_from)
+    if remap_from < 16: out = P.shoe_fix(out, remap_from, _ch.get('shoes', '3'))
     for k, v in rows.items():
         y = int(k[1:]); assert len(v) == 16, (hex(t), k, v); out[y] = v
     return out
@@ -36,7 +37,7 @@ BLOCKS[0x70] = blk(0x70,
     r7='.2888833333D98..',
     r8='..2777777733DD8.',
     r9='..2711711733DD8.',
-    r10='...7127217E33332',
+    r10='...7127217E37732',
     r11='..37127217E33332',
     r12='.367777777E33332',
     r13='..3E666666E32332',
@@ -180,7 +181,7 @@ BLOCKS[0x5E] = blk(0x5E, r5='....8191338.....', r6='....81131138....', r7='..288
     r8='.233333111138...', r9='.27777311112D8..', r10='..7117731132D88.', r11='...71272333336E.',
     r12='..3677399993363E', r15='..3EEE39999332..')
 BLOCKS[0x06] = blk(0x06, remap_from=8, r2='..28119899998...', r3='288888D9333898..', r4='23333333111288..',
-    r5='36677721111128A.', r7='.3E88EBB666B2BBA')
+    r5='36677721111128A.', r7='.3E88E8866682CCA')
 BLOCKS[0x1C] = blk(0x1C, r9='....88199188....', r10='...8991111998...', r11='..899DD11DD998..',
     r12='..892333333298..', r13='..827777777728..')
 BLOCKS[0x1D] = blk(0x1D, remap_from=7, r1='..279E2EE2E972..', r4='.3E6E6EEEE6E6E33', r5='..36668888666313')
@@ -209,7 +210,8 @@ BLOCKS[0x71] = blk(0x71, remap_from=7,
 _ORIG71 = base(0x71); _NEW71 = BLOCKS[0x71]
 
 def remap_rows(rows, r_from):
-    return [r if y < r_from else ''.join(HEX[_remap.get(HEX.index(c), HEX.index(c))] for c in r) for y, r in enumerate(rows)]
+    rows = [r if y < r_from else ''.join(HEX[_remap.get(HEX.index(c), HEX.index(c))] for c in r) for y, r in enumerate(rows)]
+    return P.shoe_fix(rows, min(r_from, 15), _ch.get('shoes', '3'))
 
 def stamp_small(rows, keep_body=False):
     rows = [list(r) for r in rows]; face_end = None
@@ -296,3 +298,19 @@ for _t in (0x5B, 0x6A, 0x6B, 0xF7):
 BLOCKS[0xE3] = back_hair(base(0xE3), 10)
 for _t in (0x0F, 0x4B, 0x4C, 0x72, 0x90, 0xB0, 0x1B):
     BLOCKS[_t] = hair_rows(BLOCKS.get(_t, base(_t)), 0, 15)
+
+# scorched poses (0x30/0x31): soot-dark Haylie - heart cap, pink glasses around the eyes, no moustache
+def _scorched(rows, eye_rows, lower_from):
+    g = [list(r) for r in small_cap(stamp_cap(rows))]
+    for y in eye_rows:
+        for x in range(16):
+            if g[y][x] == '1':
+                for xx in (x - 1, x + 1):
+                    if 0 <= xx < 16 and g[y][xx] in '23': g[y][xx] = '7'
+    return hair_rows([''.join(r) for r in g], lower_from, 15)
+BLOCKS[0x49] = _scorched(base(0x49), range(9, 13), 13)
+BLOCKS[0x4A] = _scorched(base(0x4A), range(9, 13), 13)
+BLOCKS[0x6C] = remap_rows(_scorched(base(0x6C), range(0, 4), 4), 8)
+BLOCKS[0x4D] = remap_rows(_scorched(base(0x4D), range(0, 4), 4), 8)
+BLOCKS[0x5C] = small_cap(stamp_cap(base(0x5C)))
+BLOCKS[0x59] = remap_rows(base(0x59), 0)

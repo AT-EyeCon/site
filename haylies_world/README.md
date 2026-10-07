@@ -10,6 +10,7 @@ Needs Python 3 + Pillow. Put the clean ROM (headerless, SHA-1 6b47bb75…a4c1876
     python3 tools/build.py --phase 4 --out build/Haylies_World_SMW_TEST.sfc
     python3 tools/bps.py clean_smw.sfc build/Haylies_World_SMW_TEST.sfc build/Haylies_World_SMW.bps
     python3 tools/playtest.py build/Haylies_World_SMW_TEST.sfc build final   # needs libretro-snes9x
+    python3 tools/posecapture.py build/Haylies_World_SMW_TEST.sfc build/pose_emu.png  # every pose x form, real emulator output
 
 `--phase 1` = player only, `3` = + overworld, `4` = + HUD name/title. The clean ROM is never written.
 
@@ -23,3 +24,8 @@ Needs Python 3 + Pillow. Put the clean ROM (headerless, SHA-1 6b47bb75…a4c1876
 Character data is isolated: copy `haylie.json` → `brooklyn.json` with `"replaces": "luigi"` and a new
 art folder. Luigi shares Mario's GFX32 tiles in vanilla SMW, so Brooklyn needs a second player-graphics
 bank + a small DMA-pointer hook on `$19`/player number (bank 00 $F636) — that is the one code change required.
+
+## Palette (handoff v1)
+Player row idx 6-F: skin ffd2ae, light pink ff62b0 (shoes/glasses/scrunchie), cap+shirt f24fa2 / shade 9c3368 / light ff8cc8,
+overalls 2650e8 / 1e40b8 / 142c80, skin shade e0a07c, bib heart + cape ffa8d4. Hair uses shared index 3 (8b5a18 ~ 8a552c).
+Fire: white cap/shirt, hot-pink overalls. Hands: bare skin everywhere (incl. GFX00 player pieces).
