@@ -88,7 +88,11 @@
     "h": 10,
     "H": 11,
     "g": 12,
-    "e": 15
+    "e": 15,
+    "w": 13,
+    "l": 14,
+    "p": 4,
+    "m": 2
   },
   "portrait": {
     "renderer": "tools/portrait.py",

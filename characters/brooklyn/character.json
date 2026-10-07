@@ -80,14 +80,17 @@
     ]
   },
   "head_key": {
-    "o": 1,
+    "o": 3,
     "s": 7,
     "k": 8,
     "K": 9,
     "h": 10,
     "H": 11,
     "l": 12,
-    "e": 15
+    "e": 15,
+    "r": 6,
+    "p": 4,
+    "m": 3
   },
   "portrait": {
     "renderer": "tools/portrait.py",

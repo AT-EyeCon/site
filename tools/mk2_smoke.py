@@ -75,3 +75,20 @@ def win_round(e, shot, frames_after=330):
     for k in range(frames_after // 20):
         e.run(20)
         if k <= 13: shot('30_round_end_%02d' % k)
+
+
+def battle_plan(core, rom, moves, out, tag):
+    """1-player: pick a fighter, capture the battle-plan (ladder) screen."""
+    os.makedirs(out, exist_ok=True)
+    e = Emu(core, rom)
+    e.run(700)
+    for _ in range(8): e.press(['START'], 3, release=60)
+    e.run(120); e.press(['START'], 3, release=120); e.press(['START'], 3, release=120)
+    for m in moves: e.press([m], 3, release=10)
+    shots = []
+    p = os.path.join(out, tag + '_cursor.png'); e.screenshot(p); shots.append(p)
+    e.press(['A'], 3, release=2)
+    for k in (60, 100, 160, 220, 300):
+        e.run(k - (shots and 0 or 0) if False else 40 if k > 60 else 60)
+        p = os.path.join(out, '%s_plan_%d.png' % (tag, k)); e.screenshot(p); shots.append(p)
+    return shots

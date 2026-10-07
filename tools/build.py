@@ -42,7 +42,17 @@ def head_anchors(rom, hdr, T, n_frames, cache):
     if os.path.exists(cache):
         A = json.load(open(cache))
     else:
-        A = {str(n): HF.find_head(HF.class_map(R.frame_index_image(rom, hdr, n)), T) for n in range(1, n_frames + 1)}
+        A = {}
+        for n in range(1, n_frames + 1):
+            cm = HF.class_map(R.frame_index_image(rom, hdr, n))
+            a = HF.find_head(cm, T)
+            if a[5] == 'back':
+                # a real back view is (almost) all hair; otherwise the face is visible -> use face templates
+                y, x = a[1], a[0]
+                win = cm[max(0, y - 6):y + 7, max(0, x - 5):x + 6]
+                if (win > 0).sum() and (win == 3).sum() / (win > 0).sum() < 0.7:
+                    a = HF.find_head(cm, {k: v for k, v in T.items() if k != 'back'})
+            A[str(n)] = a
         json.dump(A, open(cache, 'w'))
     ov = os.path.join(DATA, 'set8_head_overrides.json')
     if os.path.exists(ov):
@@ -109,9 +119,13 @@ def main():
         PR.install_vs_portrait(rom, space, cfg, slot['char_id'])
         write_sheet(imgs, cfg, os.path.join(args.out, '%s_MKII_SNES_sprite_sheet.png' % cfg['display_name'].title()))
         report[name] = {'set_header': hex(ha), 'tiles': len(enc.tiles), 'lost_px': sum(enc.lost.values())}
+    icon_cfgs = {RS.load_character(os.path.join(ROOT, 'characters', n))['fighter_slot']: RS.load_character(os.path.join(ROOT, 'characters', n)) for n in names}
+    ihdr, iimgs, ipals = PR.icon_set_images(clean, icon_cfgs)
+    icon_set = SB.SetEncoder(rom, space).build(ihdr, iimgs)
+    PR.install_icon_palettes(rom, space, ipals)
     blood = P.SLOTS['blood_set_index']
     blank = SB.build_blank_set(rom, space, sp.set_header(clean, blood))
-    P.install_sets(rom, space, new_sets, replace={blood: blank})
+    P.install_sets(rom, space, new_sets, replace={blood: blank, PR.ICON_SET: icon_set})
     pres.install(rom, space)
     PR.install_select_portraits(rom, space, sel_patches)
     snesrom.fix_checksum(rom)

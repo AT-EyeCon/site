@@ -12,6 +12,10 @@ from scipy import ndimage
 import headfind as HF
 from render import W, H, OX, OY
 
+# Feet line of every standing/ground frame in the shared set is origin+39 (measured over all
+# ground frames). Bodies are scaled about this point so feet stay on the floor.
+GROUND_Y = OY + 39
+
 # luminance of the shared base palette (Mileena), indices 0-15
 BASE_LUM = [0, 33, 50, 6, 75, 99, 39, 172, 56, 128, 220, 121, 106, 77, 152, 88]
 GI = [2, 3, 4, 5, 6]          # character palette gi shades dark->light
@@ -88,18 +92,31 @@ def reskin(base, anchor, templates, cfg, scale_override=None):
     belt = np.zeros(base.shape, bool)
     stripe = np.zeros(base.shape, bool)
     near_cost = ndimage.binary_dilation(costume, iterations=1)
+    best = None
     for i in range(1, nb + 1):
         comp = lab == i
         if comp.sum() < 5: continue
         if (comp & near_cost).sum() < 0.4 * comp.sum(): continue
         ys, xs = np.nonzero(comp)
         if (np.ptp(xs) + 1) < 1.5 * (np.ptp(ys) + 1): continue   # belts run across the body
+        # one belt per frame: widest qualifying band nearest the body's middle
+        mid_y = np.nonzero(base.any(1))[0].mean()
+        score = (np.ptp(xs) + 1) - 0.3 * abs(ys.mean() - mid_y)
+        if best is None or score > best[0]: best = (score, comp, ys)
+    if best:
+        _, comp, ys = best
         belt |= comp
-        mid = int(round(ys.mean()))
-        stripe |= comp & (np.arange(H)[:, None] == mid)
+        stripe |= comp & (np.arange(H)[:, None] == int(round(ys.mean())))
     lum = np.array(BASE_LUM)[base]
     body = (base > 0) & ~erase
-    out[body & (cls != 3)] = np.vectorize(_gi)(lum[body & (cls != 3)]) if (body & (cls != 3)).any() else 0
+    fab = body & (cls != 3)
+    if fab.any():
+        # cleaner fabric: smooth the digitized shading inside the cloth, then band it
+        L = lum.astype(float)
+        L[~fab] = np.nan
+        Ls = ndimage.generic_filter(np.nan_to_num(L, nan=-1), lambda v: np.median(v[v >= 0]) if (v >= 0).any() else 0,
+                                    size=3, mode='constant', cval=-1)
+        out[fab] = np.vectorize(_gi)(Ls[fab])
     d = body & (cls == 3)
     out[d] = np.where(np.isin(base[d], (1, 3)), 1, GI[0])
     if cfg['hair']['keep_base_ponytail']:
@@ -129,6 +146,9 @@ def reskin(base, anchor, templates, cfg, scale_override=None):
         fabric = np.isin(out, GI)
         ring = ndimage.binary_dilation(fabric, structure=np.ones((1, 3), bool)) & (out == 0) & ~erase
         out[ring] = GI[1]
+    fabric = np.isin(out, GI)
+    edge = fabric & ~ndimage.binary_erosion(out > 0, structure=np.ones((3, 3)))
+    out[edge & (out != GI[0])] = GI[1]
     # proportions: scale body about the object origin
     sc = scale_override or cfg['proportions']['body_scale']
     if sc != 1.0:
@@ -136,10 +156,18 @@ def reskin(base, anchor, templates, cfg, scale_override=None):
         nw, nh = int(round(W * sc)), int(round(H * sc))
         small = np.array(im.resize((nw, nh), Image.NEAREST))
         out = np.zeros_like(out)
-        ox, oy = int(round(OX - OX * sc)), int(round(OY - OY * sc))
+        ox, oy = int(round(OX - OX * sc)), int(round(GROUND_Y - GROUND_Y * sc))
         out[oy:oy + nh, ox:ox + nw] = small[:H - oy, :W - ox]
     if anchor:
-        hcx = int(round(OX + (anchor[0] - OX) * sc)); hcy = int(round(OY + (anchor[1] - OY) * sc))
+        hcx = int(round(OX + (anchor[0] - OX) * sc)); hcy = int(round(GROUND_Y + (anchor[1] - GROUND_Y) * sc))
         head = _xform(cfg['heads'][view], anchor[2], anchor[3])
         _paste(out, head, hcx, hcy)
+    # grounding: if the base pose touches the floor, the new frame must too (exactly)
+    base_rows = np.nonzero(base.any(1))[0]
+    out_rows = np.nonzero(out.any(1))[0]
+    if len(base_rows) and len(out_rows) and base_rows.max() == GROUND_Y and out_rows.max() != GROUND_Y:
+        dy = GROUND_Y - out_rows.max()
+        out = np.roll(out, dy, axis=0)
+        if dy > 0: out[:dy] = 0
+        else: out[dy:] = 0
     return out

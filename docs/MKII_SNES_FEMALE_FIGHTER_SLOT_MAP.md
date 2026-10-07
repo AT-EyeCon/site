@@ -48,6 +48,8 @@ Haylie→Mileena / Brooklyn→Kitana was kept; nothing in the ROM made another p
     4 mask bytes (one per 8-byte quarter, bit k → byte 7-k) followed by the non-zero bytes
     (handlers at `81:A451`).
 * Per-fighter VRAM budget: P1 `$0000–$0DFF`, P2 `$2200–$2FFF` of the `7E:76BC` buffer (112 tiles).
+* Ground line: in every set-8 frame that touches the floor, the lowest pixel row is origin **+39**.
+  Generated frames are scaled around that row and snapped to it, so feet stay on the floor.
 * Set 8: **263 frames**, ~7,600 unique tiles. Frames 212–263 are fatality-victim frames
   (inflate/explode, charred, skeleton, decapitated head, sliced body).
 * Effects: set 22 = **blood** drops/splats, set 24 = projectiles (fans, sais, shock rings).
@@ -62,6 +64,7 @@ Haylie→Mileena / Brooklyn→Kitana was kept; nothing in the ROM made another p
 | Versus portraits | 71 tiles × 48 bytes (6 bit-planes, 64 colours), 7×10 tiles = 56×80 px. Tile stream table `82:DCD9` (4 bytes/id): Kitana `C7:4D32`, Mileena `C7:587D`. Palette table `82:DD09`. Loader `82:D4F7…`. |
 | Decompressor | `85:B9FC`: header `size16, mode8`; back-to-front LZ; `0x40\|(n-1)` = n literal bytes, `0x00` = end. Mode 2 = interleaved. |
 | Win/name ASCII list `EF:F199` | Not used by HUD or banner (left unchanged). |
+| Battle Plan (1P ladder) face icons | Sprite **set 32**: 21×32 icons, frames 7–20 (Kitana = 12, Mileena = 14). Icon palette id = `0x80 + frame`, looked up in the palette pointer table `85:D33D` (3 bytes per id): Kitana `EF:060A`, Mileena `EF:064A`. Loader `83:F8CC`. |
 | Endings | Not investigated (out of scope; see README). |
 
 ## 4. What the build changes
@@ -76,6 +79,7 @@ Haylie→Mileena / Brooklyn→Kitana was kept; nothing in the ROM made another p
 | Win-banner strings relocated to `F0` | 4 `LDA $83D7B8,x` + `LDX #$0083` sites |
 | Select portraits (masked byte patch after decompression) | `JSL` at `80:83E9` |
 | VS portraits (new literal streams + palettes) | entries 4/5 of `82:DCD9`, `82:DD09` |
+| Battle Plan icons: set 32 re-encoded with new frames 12/14; palette ids 0x8C/0x8E repointed | set table entry 32, `85:D33D + 3*0x8C`, `+ 3*0x8E` |
 
 ## 5. Animation-group checklist (set 8 → both new sets)
 

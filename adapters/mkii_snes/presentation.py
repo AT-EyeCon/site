@@ -279,3 +279,57 @@ def install_vs_portrait(rom, space, cfg, char_id):
     for tbl, a in ((VS_TILE_TABLE, sa), (VS_PAL_TABLE, pa)):
         e = o(tbl) + 4 * char_id
         rom[e:e + 4] = bytes([a & 0xFF, a >> 8 & 0xFF, a >> 16, 0])
+
+
+# ---------------------------------------------------------------- battle-plan face icons
+ICON_SET = 32                 # sprite set holding the 21x32 ladder/battle-plan face icons
+ICON_FRAMES = {'kitana': 12, 'mileena': 14}   # icon frame == palette id - 0x80
+PALETTE_PTRS = 0x85D33D       # 3-byte palette pointer per palette id
+
+
+def icon_image(cfg, w=21, h=32):
+    """Index image (1..15) + 16-colour palette for a battle-plan icon."""
+    from PIL import Image
+    import numpy as np
+    img = _PT.render(cfg['portrait']['spec'], w=w, h=h, crop_face=True) if 'crop_face' in _PT.render.__code__.co_varnames \
+        else _PT.render(cfg['portrait']['spec'], w=w, h=h)
+    q = img.quantize(colors=15, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
+    idx = np.array(q, np.uint8) + 1
+    pal = q.getpalette()[:45]
+    pal = [(0, 0, 0)] + [tuple(pal[3 * i:3 * i + 3]) for i in range(15)]
+    return idx, pal
+
+
+def icon_set_images(rom, cfgs):
+    """All frames of the icon set, with the slots' icons replaced. cfgs: {slot_name: cfg}."""
+    from PIL import Image
+    import numpy as np
+    import sprites as _sp, render as _R
+    hdr = _sp.set_header(rom, ICON_SET)
+    imgs, n = {}, 1
+    while True:
+        try:
+            f = _sp.parse_frame(rom, hdr, n)
+            if not 0 < len(f.pieces) < 64: break
+        except Exception:
+            break
+        imgs[n] = _R.frame_index_image(rom, hdr, n); n += 1
+    pals = {}
+    for slot, cfg in cfgs.items():
+        fr = ICON_FRAMES[slot]
+        idx, pal = icon_image(cfg)
+        a = np.zeros((_R.H, _R.W), np.uint8)
+        a[_R.OY:_R.OY + idx.shape[0], _R.OX:_R.OX + idx.shape[1]] = idx
+        imgs[fr] = Image.fromarray(a, 'P')
+        pals[fr] = pal
+    return hdr, imgs, pals
+
+
+def install_icon_palettes(rom, space, pals):
+    o = lambda a: a & 0x3FFFFF
+    for fr, pal in pals.items():
+        data = bytearray()
+        for r, g, b in pal: data += ((r >> 3) | (g >> 3) << 5 | (b >> 3) << 10).to_bytes(2, 'little')
+        a = space.alloc(32); space.write(a, bytes(data))
+        e = o(PALETTE_PTRS + 3 * (0x80 + fr))
+        rom[e:e + 3] = a.to_bytes(3, 'little')

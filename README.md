@@ -71,7 +71,8 @@ character is generated at build time from the slot's own poses:
    the silhouette is loosened by 1 px, the waistband becomes the belt (white for Haylie,
    yellow/black for Brooklyn), and Haylie gets a black undershirt V.
 4. Remove the original head and hair (Haylie keeps a ponytail recoloured brown), scale the body
-   (Haylie 0.86, Brooklyn 0.72 for younger proportions), then paste the character's hand-drawn
+   about the ground line (origin +39) so feet stay on the floor (Haylie 0.86, Brooklyn 0.72 for
+   younger proportions), then paste the character's hand-drawn
    head in the right view (profile/front/back) and angle.
 5. Re-tile every frame into new 16×16/8×8 pieces within the original piece budget, and write
    new sprite sets into the expanded ROM.
@@ -94,8 +95,8 @@ the approved reference image.
 
 * Bodies keep the original poses, scaled and recoloured, so the animation stays faithful. Fists
   are gi-pink (no separate skin-tone hands).
-* Head anchors are automatic; a few fast transitional frames (rolls, flips, somersault balls) show
-  a hair-coloured blob rather than a clean face.
+* Head anchors are automatic, with 81 hand-set overrides for flips, rolls, hit reactions and
+  front-facing poses (`adapters/mkii_snes/data/set8_head_overrides.json`).
 * Brooklyn mirror match (Brooklyn vs Brooklyn): P2 uses `EF:9193`, which is also Jade's
   palette, so it was left alone and P2 Brooklyn looks grey. Haylie's mirror palette is done.
 * Fatalities *performed by* Haylie/Brooklyn still run Mileena's/Kitana's fatality logic, with no
