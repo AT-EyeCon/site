@@ -1,0 +1,51 @@
+{
+ "name": "Haylie",
+ "replaces": "mario",
+ "_note": "Player palette rows for CGRAM $86-$8F (index 6..F). Shared indices 1-5 are fixed by the game (1 white, 2 black, 3 brown = hair, 4/5 gold).",
+ "palette_roles": {
+  "6": "skin",
+  "7": "hot pink (glasses, shoes)",
+  "8": "cap shade",
+  "9": "cap highlight",
+  "A": "overalls dark",
+  "B": "overalls",
+  "C": "shirt / overalls highlight",
+  "D": "cap main",
+  "E": "skin shade",
+  "F": "buttons"
+ },
+ "palettes": {
+  "normal": [
+   "f8d0b0",
+   "f02890",
+   "981850",
+   "ff98c8",
+   "1c2c78",
+   "3a64c8",
+   "a8dcff",
+   "e84898",
+   "e09078",
+   "ffe860"
+  ],
+  "fire": [
+   "f8d0b0",
+   "f02890",
+   "981850",
+   "ff98c8",
+   "801040",
+   "d8287c",
+   "fff0f8",
+   "f070b0",
+   "e09078",
+   "ffe860"
+  ]
+ },
+ "body_remap": {
+  "1": "6",
+  "D": "C",
+  "9": "1",
+  "8": "B",
+  "C": "B",
+  "B": "A"
+ }
+}

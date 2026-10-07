@@ -1,0 +1,7 @@
+*.sfc
+*.smc
+*.bps
+*.bin
+build/
+dist/
+__pycache__/
