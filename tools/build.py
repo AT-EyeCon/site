@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(ROOT, 'tools'))
 sys.path.insert(0, os.path.join(ROOT, 'adapters', 'mkii_snes'))
 import numpy as np
 from PIL import Image
-import snesrom, sprites as sp, render as R, reskin as RS, headfind as HF, patch as P, presentation as PR
+import snesrom, setbuilder as SB, sprites as sp, render as R, reskin as RS, headfind as HF, patch as P, presentation as PR
 
 ADAPTER = os.path.join(ROOT, 'adapters', 'mkii_snes')
 DATA = os.path.join(ADAPTER, 'data')
@@ -76,7 +76,7 @@ def write_sheet(images, cfg, path, cols=16):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('target', choices=['haylie', 'brooklyn', 'all'])
+    ap.add_argument('target', help='haylie | brooklyn | all | <character id>')
     ap.add_argument('--rom', default=os.environ.get('MK2_ROM', os.path.join(ROOT, 'rom', 'Mortal Kombat II (USA) (Rev 1).sfc')))
     ap.add_argument('--out', default=os.path.join(ROOT, 'out'))
     args = ap.parse_args()
@@ -89,8 +89,11 @@ def main():
     frames_cfg = json.load(open(os.path.join(DATA, 'set8_frames.json')))
     anchors = head_anchors(rom, hdr, T, frames_cfg['frame_count'], os.path.join(args.out, '.set8_heads_cache.json'))
     names = ['haylie', 'brooklyn'] if args.target == 'all' else [args.target]
+    if not os.path.exists(os.path.join(ROOT, 'characters', names[0], 'character.json')): sys.exit('unknown character ' + names[0])
     space = P.expand(rom)
     new_sets, report = [], {}
+    pres = PR.Presentation()
+    sel_patches = []
     for name in names:
         cfg = RS.load_character(os.path.join(ROOT, 'characters', name))
         slot = P.SLOTS['fighters'][cfg['fighter_slot']]
@@ -98,12 +101,21 @@ def main():
         ha, enc = P.encode_set(rom, space, imgs)
         new_sets.append((slot['char_id'], ha))
         P.write_palette(rom, int(slot['palette'], 16), cfg['rgb'])
-        PR.apply(rom, space, cfg, slot)
+        mp = slot.get('mirror_palette')
+        if mp and cfg['palette'].get('mirror_colors') and not slot.get('mirror_palette_shared_with'):
+            P.write_palette(rom, int(mp, 16), [tuple(int(h[i:i + 2], 16) for i in (1, 3, 5)) for h in cfg['palette']['mirror_colors']])
+        PR.apply(rom, space, cfg, slot, pres)
+        sel_patches += PR.portrait_patch(clean, cfg, cfg['fighter_slot'])
+        PR.install_vs_portrait(rom, space, cfg, slot['char_id'])
         write_sheet(imgs, cfg, os.path.join(args.out, '%s_MKII_SNES_sprite_sheet.png' % cfg['display_name'].title()))
         report[name] = {'set_header': hex(ha), 'tiles': len(enc.tiles), 'lost_px': sum(enc.lost.values())}
-    P.install_sets(rom, space, new_sets)
+    blood = P.SLOTS['blood_set_index']
+    blank = SB.build_blank_set(rom, space, sp.set_header(clean, blood))
+    P.install_sets(rom, space, new_sets, replace={blood: blank})
+    pres.install(rom, space)
+    PR.install_select_portraits(rom, space, sel_patches)
     snesrom.fix_checksum(rom)
-    base = {'all': 'Haylie_Brooklyn_MKII_SNES', 'haylie': 'Haylie_MKII_SNES', 'brooklyn': 'Brooklyn_MKII_SNES'}[args.target]
+    base = 'Haylie_Brooklyn_MKII_SNES' if args.target == 'all' else args.target.title() + '_MKII_SNES'
     sfc = os.path.join(args.out, base + ('_TEST.sfc' if args.target == 'all' else '.sfc'))
     open(sfc, 'wb').write(rom)
     bps = snesrom.bps_create(clean, bytes(rom))

@@ -15,6 +15,15 @@ c=open('cpuexec.cpp').read()
 if 'mk_trace' not in c:
     c=c.replace('#include "snes9x.h"','#include "snes9x.h"\n#include <stdio.h>\nuint32 mk_pc; FILE *mk_trace=NULL; int mk_exec=0;\nextern "C" void retro_mk_trace(const char *path, int exec){ if(mk_trace){fclose(mk_trace);mk_trace=NULL;} if(path) mk_trace=fopen(path,"w"); mk_exec=exec; }',1)
     c=c.replace("		Registers.PCw++;\n		(*Opcodes[Op].S9xOpcode)();","		mk_pc = Registers.PBPC; if(mk_trace&&mk_exec) fprintf(mk_trace,\"X %06X\\n\",mk_pc);\n		Registers.PCw++;\n		(*Opcodes[Op].S9xOpcode)();",1)
+    c+='''
+extern "C" void retro_mk_ppu(uint16 *out){
+	out[0]=PPU.BGMode;
+	for(int i=0;i<4;i++){ out[1+i*4]=PPU.BG[i].SCBase; out[2+i*4]=PPU.BG[i].NameBase; out[3+i*4]=PPU.BG[i].SCSize; out[4+i*4]=PPU.BG[i].BGSize; }
+	out[17]=PPU.OBJNameBase; out[18]=PPU.OBJSizeSelect; out[19]=Memory.FillRAM[0x212c]; out[20]=Memory.FillRAM[0x212d];
+	memcpy(out+32, PPU.CGDATA, 512);
+	memcpy(out+32+256, PPU.OAMData, 544);
+}
+'''
     open('cpuexec.cpp','w').write(c)
 g=open('getset.h').read()
 if 'mk_trace' not in g:

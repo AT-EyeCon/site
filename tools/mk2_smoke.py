@@ -39,11 +39,13 @@ def run(core, rom, out, p1=('DOWN', 'DOWN'), p2=('DOWN', 'LEFT'), fight=True):
     e.hold(['RIGHT']); e.run(60); e.hold([])
     e.hold(['Y']); e.run(6); shot('12_punch'); e.hold([]); e.run(20)
     e.hold(['B']); e.run(8); shot('13_kick'); e.hold([]); e.run(30)
-    # P2 attacks P1 (hit reaction / knockdown via sweep)
-    e.hold(['Y'], port=1); e.run(8); shot('14_p2_punch'); e.hold([], port=1); e.run(4); shot('15_p1_hit'); e.run(30)
-    e.hold(['LEFT', 'B'], port=1); e.run(4); e.hold([], port=1)
-    e.hold(['X'], port=1); e.run(10); e.hold([], port=1); e.run(10); shot('16_p1_hit2'); e.run(30)
-    e.hold(['DOWN', 'X'], port=1); e.run(12); e.hold([], port=1); shot('17_uppercut'); e.run(25); shot('18_knockdown'); e.run(90); shot('19_recovery')
+    # P2 walks in and attacks P1: hit reaction, sweep knockdown, uppercut, recovery
+    e.hold(['LEFT'], port=1); e.run(70); e.hold([], port=1)
+    e.hold(['X'], port=1); e.run(4); e.hold([], port=1); e.run(6); shot('14_p2_punch'); e.run(6); shot('15_p1_hit'); e.run(30)
+    e.hold(['RIGHT', 'B'], port=1); e.run(4); e.hold([], port=1); e.run(14); shot('16_sweep'); e.run(10); shot('17_knockdown')
+    e.run(40); shot('18_getup'); e.run(40)
+    e.hold(['LEFT'], port=1); e.run(20); e.hold(['DOWN'], port=1); e.run(8); e.hold(['DOWN', 'X'], port=1); e.run(4)
+    e.hold([], port=1); e.run(10); shot('19_uppercut_hit'); e.run(20); shot('20_airborne'); e.run(70); shot('21_recovery')
     return e, shots
 
 
@@ -62,3 +64,14 @@ def contact(shots, path, cols=5):
 if __name__ == '__main__':
     e, shots = run(sys.argv[1], sys.argv[2], sys.argv[3])
     contact(shots, os.path.join(sys.argv[3], 'contact.png'))
+
+
+def win_round(e, shot, frames_after=330):
+    """From fight start: close distance, P1 attacks until time-out, capture win banner."""
+    e.hold(['LEFT'], port=1); e.run(90); e.hold([], port=1)
+    e.hold(['RIGHT']); e.run(30); e.hold([])
+    for i in range(205):
+        e.hold(['A']); e.run(3); e.hold([]); e.run(12)
+    for k in range(frames_after // 20):
+        e.run(20)
+        if k <= 13: shot('30_round_end_%02d' % k)

@@ -37,5 +37,5 @@ def sheet(images, labels, pal, cols=16, bg=(40, 40, 56)):
         rgba = p.convert('RGBA'); mask = Image.frombytes('L', im.size, bytes(255 if v else 0 for v in im.tobytes()))
         x, y = (i % cols) * W, (i // cols) * (H + 10)
         out.paste(rgba.convert('RGB'), (x, y + 10), mask)
-        d.text((x + 2, y), str(lab), fill=(255, 255, 0))
+        d.text((x + 2, y + H - 2), str(lab), fill=(255, 255, 0))
     return out

@@ -3,21 +3,125 @@
   "display_name": "BROOKLYN",
   "fighter_slot": "kitana",
   "reference": "Approved Haylie vs Brooklyn fighter reference image (art direction only)",
-  "hair": {"color": "light brown", "style": "curly, voluminous", "keep_base_ponytail": false},
-  "glasses": {"present": false},
-  "outfit": {"gi": "bright pink martial-arts gi, full sleeves and trousers", "undershirt": null},
-  "belt": {"color": "yellow", "stripe": "black"},
-  "proportions": {"body_scale": 0.72, "note": "smaller/younger of the two"},
-  "palette": {
-    "slots": ["transparent", "outline", "gi-1", "gi-2", "gi-3", "gi-4", "gi-5",
-              "skin-dark", "skin-mid", "skin-light", "hair-dark", "hair-mid",
-              "hair-light", "belt", "belt-shade", "black"],
-    "colors": ["#000000", "#201018", "#800c50", "#b81870", "#e83098", "#f860c0", "#f898d8",
-               "#c07860", "#e8a888", "#fcd4b8", "#784828", "#a87040",
-               "#d0a060", "#f8d828", "#b89010", "#181818"]
+  "hair": {
+    "color": "light brown",
+    "style": "curly, voluminous",
+    "keep_base_ponytail": false
   },
-  "head_key": {"o": 1, "s": 7, "k": 8, "K": 9, "h": 10, "H": 11, "l": 12, "e": 15},
-  "portrait": "art/portrait.txt",
+  "glasses": {
+    "present": false
+  },
+  "outfit": {
+    "gi": "bright pink martial-arts gi, full sleeves and trousers",
+    "undershirt": null
+  },
+  "belt": {
+    "color": "yellow",
+    "stripe": "black"
+  },
+  "proportions": {
+    "body_scale": 0.72,
+    "note": "smaller/younger of the two"
+  },
+  "palette": {
+    "slots": [
+      "transparent",
+      "outline",
+      "gi-1",
+      "gi-2",
+      "gi-3",
+      "gi-4",
+      "gi-5",
+      "skin-dark",
+      "skin-mid",
+      "skin-light",
+      "hair-dark",
+      "hair-mid",
+      "hair-light",
+      "belt",
+      "belt-shade",
+      "black"
+    ],
+    "colors": [
+      "#000000",
+      "#201018",
+      "#800c50",
+      "#b81870",
+      "#e83098",
+      "#f860c0",
+      "#f898d8",
+      "#c07860",
+      "#e8a888",
+      "#fcd4b8",
+      "#784828",
+      "#a87040",
+      "#d0a060",
+      "#f8d828",
+      "#b89010",
+      "#181818"
+    ],
+    "mirror_colors": [
+      "#000000",
+      "#201018",
+      "#0c3c80",
+      "#1858b0",
+      "#3080e0",
+      "#60a8f0",
+      "#a0d0f8",
+      "#c07860",
+      "#e8a888",
+      "#fcd4b8",
+      "#784828",
+      "#a87040",
+      "#d0a060",
+      "#f8d828",
+      "#b89010",
+      "#181818"
+    ]
+  },
+  "head_key": {
+    "o": 1,
+    "s": 7,
+    "k": 8,
+    "K": 9,
+    "h": 10,
+    "H": 11,
+    "l": 12,
+    "e": 15
+  },
+  "portrait": {
+    "renderer": "tools/portrait.py",
+    "spec": {
+      "bg": [
+        "#7030c0",
+        "#200848"
+      ],
+      "skin": [
+        "#f4c0a0",
+        "#c88870",
+        "#fde0cc"
+      ],
+      "hair": [
+        "#b07840",
+        "#7a4a24",
+        "#e0b070"
+      ],
+      "gi": [
+        "#f048a8",
+        "#a8206c",
+        "#ff98d4"
+      ],
+      "undershirt": null,
+      "hair_style": "curly",
+      "glasses": null,
+      "eye": "#4a3020",
+      "smile": true,
+      "cheeks": "#f49890",
+      "head_scale": 1.05,
+      "face_y": 0.44,
+      "seed": 7
+    }
+  },
   "sprite_source": "art/heads.txt + procedural body reskin of the slot's base poses (adapters/mkii_snes/reskin.py)",
   "animation_mapping": "adapters/mkii_snes/data/set8_frames.json",
   "special_move_mapping": "inherits Kitana gameplay (fan moves); fan artwork recoloured to gi palette",

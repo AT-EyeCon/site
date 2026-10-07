@@ -36,7 +36,7 @@ def expand(rom, size=0x400000):
     return RomSpace(rom, 0xF00000)
 
 
-def install_sets(rom, space, new_sets):
+def install_sets(rom, space, new_sets, replace=None):
     """new_sets: list of (char_id, header_addr). Relocates the set table and hooks."""
     old_n = SLOTS['set_table_entries']
     idx_tbl = space.alloc(2 * (old_n + len(new_sets)))
@@ -50,6 +50,9 @@ def install_sets(rom, space, new_sets):
         space.write(idx_tbl + 2 * i, bytes([ha >> 16, 0]))
         space.write(adr_tbl + 2 * i, bytes([ha & 0xFF, ha >> 8 & 0xFF]))
         routes.append((cid, 2 * i))
+    for idx, ha2 in (replace or {}).items():         # e.g. blood set -> blank set
+        space.write(idx_tbl + idx, bytes([ha2 >> 16, 0]))
+        space.write(adr_tbl + idx, bytes([ha2 & 0xFF, ha2 >> 8 & 0xFF]))
     hook = asm_hook(routes, SLOTS['shared_set_index'])
     ha = space.alloc(len(hook)); space.write(ha, hook)
     # JSL hook (replaces XBA ; AND #$00FE)

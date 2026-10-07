@@ -7,9 +7,31 @@
   "shared_set_frames": 263,
   "char_id_wram": "7E:4C10 (word per object slot, slot 0 = P1, slot 2 = P2)",
   "fighters": {
-    "mileena": {"char_id": 5, "palette": "0xEF91B3", "select_cell": [2, 0]},
-    "kitana":  {"char_id": 4, "palette": "0xEF9173", "select_cell": [1, 2]},
-    "jade":    {"char_id": null, "palette": "0xEF9193", "note": "hidden fighter, keeps original set 8"}
+    "mileena": {
+      "char_id": 5,
+      "palette": "0xEF91B3",
+      "select_cell": [
+        2,
+        0
+      ],
+      "mirror_palette": "0xEF91D3"
+    },
+    "kitana": {
+      "char_id": 4,
+      "palette": "0xEF9173",
+      "select_cell": [
+        1,
+        2
+      ],
+      "mirror_palette": "0xEF9193",
+      "mirror_palette_shared_with": "jade"
+    },
+    "jade": {
+      "char_id": null,
+      "palette": "0xEF9193",
+      "note": "hidden fighter, keeps original set 8"
+    }
   },
-  "alt_palette_shared": "0xEF91D3"
+  "blood_set_index": 22,
+  "projectile_set_index": 24
 }

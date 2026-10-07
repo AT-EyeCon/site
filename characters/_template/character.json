@@ -1,28 +1,29 @@
 {
-  "id": "haylie",
-  "display_name": "HAYLIE",
+  "id": "newcharacter",
+  "display_name": "NEWNAME",
   "fighter_slot": "mileena",
-  "reference": "Approved Haylie vs Brooklyn fighter reference image (art direction only)",
+  "reference": "Approved reference image (art direction only)",
   "hair": {
-    "color": "dark brown",
-    "style": "pulled back, ponytail",
-    "keep_base_ponytail": true
+    "color": "",
+    "style": "",
+    "keep_base_ponytail": false
   },
   "glasses": {
-    "present": true,
-    "color": "pink"
+    "present": false,
+    "color": null
   },
   "outfit": {
-    "gi": "bright pink martial-arts gi, full sleeves and trousers",
-    "undershirt": "black"
+    "gi": "",
+    "undershirt": null,
+    "loose_px": 1
   },
   "belt": {
-    "color": "white",
+    "color": "",
     "stripe": null
   },
   "proportions": {
-    "body_scale": 0.86,
-    "note": "older/taller of the two"
+    "body_scale": 0.85,
+    "note": "1.0 = original slot size; smaller = younger"
   },
   "palette": {
     "slots": [
@@ -38,10 +39,10 @@
       "skin-light",
       "hair-dark",
       "hair-mid",
-      "glasses",
+      "accent-1",
       "belt",
       "belt-shade",
-      "undershirt"
+      "accent-2"
     ],
     "colors": [
       "#000000",
@@ -61,24 +62,7 @@
       "#b8b8c8",
       "#141010"
     ],
-    "mirror_colors": [
-      "#000000",
-      "#181018",
-      "#580c78",
-      "#7c20a8",
-      "#a040d0",
-      "#c070e8",
-      "#dca8f8",
-      "#b07058",
-      "#e0a080",
-      "#f8c8a8",
-      "#382018",
-      "#603828",
-      "#ff40b0",
-      "#f8f8f8",
-      "#b8b8c8",
-      "#141010"
-    ]
+    "mirror_colors": null
   },
   "head_key": {
     "o": 1,
@@ -112,19 +96,19 @@
         "#a01868",
         "#ff90d0"
       ],
-      "undershirt": "#141010",
+      "undershirt": null,
       "hair_style": "ponytail",
-      "glasses": "#ff3cb4",
+      "glasses": null,
       "eye": "#3a2014",
       "smile": false,
       "cheeks": null,
       "head_scale": 1.0,
-      "face_y": 0.4,
-      "seed": 3
+      "face_y": 0.42,
+      "seed": 1
     }
   },
-  "sprite_source": "art/heads.txt + procedural body reskin of the slot's base poses (adapters/mkii_snes/reskin.py)",
+  "sprite_source": "art/heads.txt (profile/front/back, 17x17 max) + procedural body reskin",
   "animation_mapping": "adapters/mkii_snes/data/set8_frames.json",
-  "special_move_mapping": "inherits Mileena gameplay (sai moves); sai artwork recoloured to gi palette",
-  "family_safe_finisher_behavior": "fatality-victim frames replaced with non-graphic poses; see docs"
+  "special_move_mapping": "inherits slot gameplay",
+  "family_safe_finisher_behavior": "fatality-victim frames blank; blood set blanked globally"
 }

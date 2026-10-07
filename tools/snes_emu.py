@@ -110,3 +110,15 @@ def _trace(self, path=None, exec_=False):
     """Requires the instrumented core (tools/emulator/build_core.sh)."""
     self.lib.retro_mk_trace(path.encode() if path else None, int(exec_))
 Emu.trace = _trace
+
+
+def _ppu(self):
+    """BG/OBJ registers, CGRAM and OAM (instrumented core only)."""
+    buf = (C.c_uint16 * (32 + 256 + 272))()
+    self.lib.retro_mk_ppu(buf)
+    b = list(buf)
+    bgs = [dict(sc=b[1 + i * 4], name=b[2 + i * 4], scsize=b[3 + i * 4], tile16=b[4 + i * 4]) for i in range(4)]
+    cg = bytes(C.string_at(C.addressof(buf) + 64, 512))
+    oam = bytes(C.string_at(C.addressof(buf) + 64 + 512, 544))
+    return dict(mode=b[0], bg=bgs, objname=b[17], objsize=b[18], tm=b[19], ts=b[20], cgram=cg, oam=oam)
+Emu.ppu = _ppu

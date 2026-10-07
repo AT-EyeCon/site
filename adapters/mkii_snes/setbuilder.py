@@ -5,6 +5,7 @@ Each new frame keeps the ORIGINAL frame's piece budget (same number of 16x16 and
 VRAM/OAM usage and per-scanline sprite load never exceed what the game already
 handles.  Coordinates are always written in absolute form (no delta nibbles).
 """
+import numpy as np
 import sprites as sp
 from render import OX, OY, W, H
 
@@ -46,7 +47,7 @@ def _occupied(px):
     return any(v for row in px for v in row)
 
 
-def tile_frame(img, nlarge, nsmall):
+def tile_frame_grid(img, nlarge, nsmall):
     """Choose 16x16/8x8 pieces covering img with <= nlarge / nsmall pieces.
     Returns (larges, smalls, lost_pixels) where entries are canvas (x, y)."""
     data = img.tobytes()
@@ -83,6 +84,33 @@ def tile_frame(img, nlarge, nsmall):
     L = [(bx + 16 * cx, by + 16 * cy) for cx, cy in larges]
     S = [(bx + 16 * k[0] + 8 * (q & 1), by + 16 * k[1] + 8 * (q >> 1)) for _, k, q in smalls]
     return L, S, lost
+
+
+def _box_sums(m, k):
+    """sum of m over every kxk box anchored at its top-left (y, x)."""
+    ii = np.pad(m, ((1, k), (1, k))).cumsum(0).cumsum(1)
+    Hh, Ww = m.shape
+    return ii[k:k + Hh + 1, k:k + Ww + 1][:Hh, :Ww] - ii[:Hh, k:k + Ww + 1][:, :Ww] \
+        - ii[k:k + Hh + 1, :Ww][:Hh] + ii[:Hh, :Ww]
+
+
+def tile_frame_greedy(img, nlarge, nsmall):
+    m = (np.frombuffer(img.tobytes(), np.uint8).reshape(H, W) > 0).astype(np.int32)
+    left = m.copy(); L, S = [], []
+    for k, n, out in ((16, nlarge, L), (8, nsmall, S)):
+        for _ in range(n):
+            bs = _box_sums(left, k)
+            y, x = np.unravel_index(np.argmax(bs), bs.shape)
+            if bs[y, x] == 0: break
+            out.append((int(x), int(y))); left[y:y + k, x:x + k] = 0
+    return L, S, int(left.sum())
+
+
+def tile_frame(img, nlarge, nsmall):
+    g = tile_frame_greedy(img, nlarge, nsmall)
+    if g[2] == 0: return g
+    r = tile_frame_grid(img, nlarge, nsmall)
+    return g if g[2] <= r[2] else r
 
 
 class SetEncoder:
@@ -162,3 +190,24 @@ class SetEncoder:
         ha = self.space.alloc(16)
         self.space.write(ha, bytes(hdr))
         return ha
+
+
+def build_blank_set(rom, space, orig_hdr, nframes=511):
+    """A set whose every frame is one transparent 8x8 piece (used to hide effects, e.g. blood)."""
+    tile = space.alloc(32, align=32); space.write(tile, BLANK)
+    gt = space.alloc(4); space.write(gt, bytes([tile & 0xFF, tile >> 8 & 0xFF, tile >> 16, 0]))
+    frame = space.alloc(2 + 3 + 2)
+    space.write(frame, bytes([1, 0, 0, 0, 0, 0, 0]))       # 1 piece, 0 large ; abs x=0,y=0 ; tile word 0
+    nb = (nframes + 63) // 64
+    ft = space.alloc(2 * nframes + nb + 1)
+    for n in range(nframes):
+        space.write(ft + 2 * n, bytes([frame & 0xFF, frame >> 8 & 0xFF]))
+    bt = ft + 2 * nframes
+    space.write(bt, bytes([frame >> 16]) * (nb + 1))
+    hdr = bytearray(orig_hdr.raw)
+    hdr[0:2] = bytes([bt & 0xFF, bt >> 8 & 0xFF])
+    hdr[2:4] = bytes([gt & 0xFF, gt >> 8 & 0xFF]); hdr[4] = gt >> 16
+    hdr[5:7] = bytes([ft & 0xFF, ft >> 8 & 0xFF]); hdr[7] = ft >> 16
+    assert ft >> 16 == frame >> 16 == bt >> 16
+    ha = space.alloc(16); space.write(ha, bytes(hdr))
+    return ha
