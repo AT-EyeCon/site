@@ -1,0 +1,7 @@
+# Never commit Nintendo ROM data or build output
+*.z64
+*.n64
+*.v64
+*.zip
+work/
+out/

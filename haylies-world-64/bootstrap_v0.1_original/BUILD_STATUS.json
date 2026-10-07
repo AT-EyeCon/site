@@ -1,0 +1,25 @@
+{
+  "project": "Haylie's World 64",
+  "bootstrap_version": "0.1",
+  "target": "HackerN64/HackerSM64",
+  "user_workflow": "iPhone only via GitHub Codespaces",
+  "verified_baserom_sha1": "9bef1128717f958171a4afac3ed78ee2bb4e86ce",
+  "prototype_scope": [
+    "pink cap/shirt/arms",
+    "pink shoes",
+    "white heart cap logo",
+    "transparent moustache texture",
+    "pink low-poly glasses",
+    "brown low-poly ponytail",
+    "original Mario skeleton and animations"
+  ],
+  "not_yet_complete": [
+    "final custom Haylie head/body",
+    "title screen",
+    "HUD/name text",
+    "voice",
+    "special cap visual polish",
+    "all Mario textual references"
+  ],
+  "test_required": "Build script has been statically prepared but cannot be compiled in this chat container because outbound GitHub/network access is unavailable."
+}
