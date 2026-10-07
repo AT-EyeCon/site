@@ -1,0 +1,15 @@
+{
+  "_doc": "Shared Kitana/Mileena/Jade sprite set (index 8), frames 1-263. Groups identified from sheet review + emulator observation. 'family_safe' maps fatality-victim / gore frames to non-graphic substitutes (0 = blank frame).",
+  "frame_count": 263,
+  "family_safe": {
+    "228": 1, "229": 1, "230": 1,
+    "231": 1, "232": 169, "233": 169, "234": 0,
+    "235": 1, "236": 1, "237": 1, "238": 1,
+    "239": 0, "240": 0, "241": 0, "242": 0, "243": 0, "244": 0, "245": 0, "246": 0,
+    "247": 1, "248": 1, "249": 1, "250": 1,
+    "251": 169, "252": 169, "253": 169, "254": 169,
+    "255": 0, "256": 0, "257": 0, "258": 0, "259": 0,
+    "260": 1, "261": 1, "262": 1, "263": 0
+  },
+  "weapon_only_frames": []
+}

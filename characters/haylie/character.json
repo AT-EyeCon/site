@@ -1,0 +1,25 @@
+{
+  "id": "haylie",
+  "display_name": "HAYLIE",
+  "fighter_slot": "mileena",
+  "reference": "Approved Haylie vs Brooklyn fighter reference image (art direction only)",
+  "hair": {"color": "dark brown", "style": "pulled back, ponytail", "keep_base_ponytail": true},
+  "glasses": {"present": true, "color": "pink"},
+  "outfit": {"gi": "bright pink martial-arts gi, full sleeves and trousers", "undershirt": "black"},
+  "belt": {"color": "white", "stripe": null},
+  "proportions": {"body_scale": 0.86, "note": "older/taller of the two"},
+  "palette": {
+    "slots": ["transparent", "outline", "gi-1", "gi-2", "gi-3", "gi-4", "gi-5",
+              "skin-dark", "skin-mid", "skin-light", "hair-dark", "hair-mid",
+              "glasses", "belt", "belt-shade", "undershirt"],
+    "colors": ["#000000", "#181018", "#780c48", "#b01c68", "#e03890", "#f868b8", "#f8a0d8",
+               "#b07058", "#e0a080", "#f8c8a8", "#382018", "#603828",
+               "#ff40b0", "#f8f8f8", "#b8b8c8", "#141010"]
+  },
+  "head_key": {"o": 1, "s": 7, "k": 8, "K": 9, "h": 10, "H": 11, "g": 12, "e": 15},
+  "portrait": "art/portrait.txt",
+  "sprite_source": "art/heads.txt + procedural body reskin of the slot's base poses (adapters/mkii_snes/reskin.py)",
+  "animation_mapping": "adapters/mkii_snes/data/set8_frames.json",
+  "special_move_mapping": "inherits Mileena gameplay (sai moves); sai artwork recoloured to gi palette",
+  "family_safe_finisher_behavior": "fatality-victim frames replaced with non-graphic poses; see docs"
+}

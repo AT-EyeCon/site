@@ -1,0 +1,25 @@
+{
+  "id": "brooklyn",
+  "display_name": "BROOKLYN",
+  "fighter_slot": "kitana",
+  "reference": "Approved Haylie vs Brooklyn fighter reference image (art direction only)",
+  "hair": {"color": "light brown", "style": "curly, voluminous", "keep_base_ponytail": false},
+  "glasses": {"present": false},
+  "outfit": {"gi": "bright pink martial-arts gi, full sleeves and trousers", "undershirt": null},
+  "belt": {"color": "yellow", "stripe": "black"},
+  "proportions": {"body_scale": 0.72, "note": "smaller/younger of the two"},
+  "palette": {
+    "slots": ["transparent", "outline", "gi-1", "gi-2", "gi-3", "gi-4", "gi-5",
+              "skin-dark", "skin-mid", "skin-light", "hair-dark", "hair-mid",
+              "hair-light", "belt", "belt-shade", "black"],
+    "colors": ["#000000", "#201018", "#800c50", "#b81870", "#e83098", "#f860c0", "#f898d8",
+               "#c07860", "#e8a888", "#fcd4b8", "#784828", "#a87040",
+               "#d0a060", "#f8d828", "#b89010", "#181818"]
+  },
+  "head_key": {"o": 1, "s": 7, "k": 8, "K": 9, "h": 10, "H": 11, "l": 12, "e": 15},
+  "portrait": "art/portrait.txt",
+  "sprite_source": "art/heads.txt + procedural body reskin of the slot's base poses (adapters/mkii_snes/reskin.py)",
+  "animation_mapping": "adapters/mkii_snes/data/set8_frames.json",
+  "special_move_mapping": "inherits Kitana gameplay (fan moves); fan artwork recoloured to gi palette",
+  "family_safe_finisher_behavior": "fatality-victim frames replaced with non-graphic poses; see docs"
+}
