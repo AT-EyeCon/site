@@ -1,0 +1,7 @@
+# Cloudflare Pages config. Gives the Goal Drafter free Workers AI (no API key needed).
+name = "the-vault-site"
+pages_build_output_dir = "."
+compatibility_date = "2025-09-01"
+
+[ai]
+binding = "AI"

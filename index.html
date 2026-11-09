@@ -6,6 +6,7 @@
   <title>The Vault, TVI Toolkit</title>
   <meta name="description" content="The Vault helps TVIs write legally compliant IEPs in minutes with ECC-aligned SMART goals, PLAAFP templates, and service justification scripts." />
   <link rel="stylesheet" href="styles.css" />
+  <script src="config.js"></script>
 </head>
 
 <body>
@@ -21,6 +22,7 @@
       </div>
 
       <nav class="site-nav" aria-label="Primary navigation">
+        <a href="goal-drafter.html" class="nav-new">Goal Drafter</a>
         <a href="#inside">What’s Inside</a>
         <a href="#formats">Formats</a>
         <a href="#pricing">Pricing</a>
@@ -28,7 +30,7 @@
       </nav>
 
       <div class="header-cta">
-        <a class="btn btn-primary" href="[PAYHIP_PRO_BUNDLE_URL]" target="_blank" rel="noopener">
+        <a class="btn btn-primary" data-link="pro">
           Get the Pro Bundle ($147)
         </a>
       </div>
@@ -52,13 +54,14 @@
           </ul>
 
           <div class="cta-row">
-            <a class="btn btn-primary" href="[PAYHIP_PRO_BUNDLE_URL]" target="_blank" rel="noopener">
+            <a class="btn btn-primary" data-link="pro">
               Get TVI Toolkit v1.3 Pro Bundle
             </a>
-            <a class="btn btn-secondary" href="[PAYHIP_LEAD_MAGNET_URL]" target="_blank" rel="noopener">
+            <a class="btn btn-secondary" data-link="leadMagnet">
               Free checklist
             </a>
           </div>
+          <p><a href="goal-drafter.html"><strong>Or try the free AI Goal Drafter →</strong></a></p>
 
           <p class="note">
             No subscriptions required. This is a standalone toolkit.
@@ -70,6 +73,7 @@
             src="assets/mockup-tvi-toolkit-pro.png"
             alt="TVI Toolkit Pro Bundle preview mockup"
             loading="lazy"
+            onerror="this.remove()"
             width="1200"
             height="1200"
           />
@@ -87,6 +91,20 @@
           <li>You spend more time formatting than planning instruction.</li>
           <li>You worry about compliance reviews when documentation gets thin.</li>
         </ul>
+      </div>
+    </section>
+
+    <!-- FREE TOOL PROMO -->
+    <section class="section" aria-labelledby="promo-title">
+      <div class="container">
+        <div class="promo">
+          <div>
+            <span class="badge">FREE TOOL</span>
+            <h2 id="promo-title">Need one goal right now? Draft it free in 10 seconds.</h2>
+            <p>Pick an ECC area and a skill. Get a SMART goal, 3 benchmarks, and a PLAAFP starter. No sign-up, and no student data needed.</p>
+          </div>
+          <a class="btn btn-primary" href="goal-drafter.html">Try the Goal Drafter</a>
+        </div>
       </div>
     </section>
 
@@ -215,21 +233,21 @@
             <p class="price-label">TVI Toolkit v1.3 Pro Bundle</p>
             <p class="price">$147</p>
             <p class="small">Individual products: $27–$47 each</p>
-            <p class="small">Estimated savings: $488–$878 vs buying separately (use only if verified)</p>
+            <!-- TODO: un-comment once the savings number is verified
+            <p class="small">Estimated savings: $488–$878 vs buying separately</p> -->
           </div>
 
           <div class="cta-row">
-            <a class="btn btn-primary" href="[PAYHIP_PRO_BUNDLE_URL]" target="_blank" rel="noopener">
+            <a class="btn btn-primary" data-link="pro">
               Buy the Pro Bundle
             </a>
-            <a class="btn btn-secondary" href="[PAYHIP_LEAD_MAGNET_URL]" target="_blank" rel="noopener">
+            <a class="btn btn-secondary" data-link="leadMagnet">
               Free checklist
             </a>
           </div>
 
-          <p class="note">
-            Membership access: [PLACEHOLDER: Coming soon, add your real launch date].
-          </p>
+          <!-- TODO: add when you have a real launch date
+          <p class="note">Membership access: coming soon.</p> -->
         </div>
       </div>
     </section>
@@ -262,7 +280,7 @@
 
           <details>
             <summary>What’s your refund policy?</summary>
-            <p>See the Refund Policy page: <a href="[REFUND_POLICY_URL]" target="_blank" rel="noopener">Read the refund policy</a>.</p>
+            <p>See the Refund Policy page: <a data-link="refund">Read the refund policy</a>.</p>
           </details>
         </div>
       </div>
@@ -275,18 +293,14 @@
 
       <ul class="footer-links">
         <li><a href="mailto:garrett@thevaultresources.com">garrett@thevaultresources.com</a></li>
-        <li><a href="[REFUND_POLICY_URL]" target="_blank" rel="noopener">Refund Policy</a></li>
-        <li><a href="[TERMS_URL]" target="_blank" rel="noopener">Terms of Service</a></li>
-        <li><a href="[ACCESSIBILITY_STATEMENT_URL]" target="_blank" rel="noopener">Accessibility Statement</a></li>
+        <li><a data-link="refund">Refund Policy</a></li>
+        <li><a data-link="terms">Terms of Service</a></li>
+        <li><a data-link="accessibility">Accessibility Statement</a></li>
       </ul>
 
       <p class="small">© <span id="year">2025</span> The Vault TVI Toolkit</p>
     </div>
   </footer>
 
-  <script>
-    // Optional tiny JS to keep the footer year current.
-    document.getElementById("year").textContent = String(new Date().getFullYear());
-  </script>
 </body>
 </html>

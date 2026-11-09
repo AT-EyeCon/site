@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free TVI IEP Goal Drafter | The Vault</title>
+  <meta name="description" content="Free AI tool for TVIs: draft an ECC-aligned SMART IEP goal, benchmarks, and a PLAAFP starter in seconds. No sign-up. No student data." />
+  <meta property="og:title" content="Free TVI IEP Goal Drafter" />
+  <meta property="og:description" content="Draft an ECC-aligned SMART goal + benchmarks in seconds. Built by a TVI, for TVIs." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="config.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="brand-name" href="/">The Vault, TVI Toolkit</a>
+        <span class="brand-tagline">Built by a TVI, for TVIs.</span>
+      </div>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/#inside">What’s Inside</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#faq">FAQ</a>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn-primary" data-link="pro">Get the Pro Bundle ($147)</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" aria-labelledby="tool-title">
+      <div class="container">
+        <span class="badge">FREE TOOL</span>
+        <h1 id="tool-title">TVI IEP Goal Drafter</h1>
+        <p class="lead">Pick an ECC area, describe the skill, and get a SMART goal, 3 benchmarks, and a PLAAFP starter in seconds.</p>
+
+        <div class="alert alert-warn" role="note">
+          <strong>Protect your students.</strong> Don’t enter names, birthdates, ID numbers, or anything that identifies a student. This tool doesn’t need it, and it blocks common identifiers.
+        </div>
+
+        <div class="tool">
+          <form id="drafter" class="form-grid" novalidate>
+            <div>
+              <label for="ecc">ECC area</label>
+              <select id="ecc" name="ecc" required></select>
+            </div>
+            <div>
+              <label for="grade">Grade band</label>
+              <select id="grade" name="grade" required></select>
+            </div>
+            <div>
+              <label for="level">Current performance level</label>
+              <select id="level" name="level" required></select>
+            </div>
+            <div>
+              <label for="setting">Setting</label>
+              <select id="setting" name="setting" required></select>
+            </div>
+            <div>
+              <label for="focus">Skill focus
+                <span class="hint">A few words. Example: “locating classroom materials using systematic search patterns”</span>
+              </label>
+              <textarea id="focus" name="focus" rows="3" maxlength="160" required aria-describedby="focus-count"></textarea>
+              <span id="focus-count" class="counter">0 / 160</span>
+            </div>
+            <div id="error" class="alert alert-err" role="alert" hidden></div>
+            <div class="cta-row">
+              <button id="submit" class="btn btn-primary" type="submit">Draft my goal</button>
+            </div>
+            <p class="counter" id="remaining" aria-live="polite"></p>
+          </form>
+
+          <section class="output" aria-labelledby="out-title" aria-live="polite" aria-busy="false" id="output">
+            <h2 id="out-title" style="font-size:1.3rem">Your draft</h2>
+            <p class="note" id="placeholder">Fill in the form and your goal appears here. Always review and adjust it using your own assessment data.</p>
+            <div id="result" hidden>
+              <h3>Annual goal</h3>
+              <p class="goal" id="r-goal"></p>
+              <h3>Benchmarks / short-term objectives</h3>
+              <ol id="r-bench"></ol>
+              <h3>How to measure it</h3>
+              <p id="r-measure"></p>
+              <h3>Suggested accommodations</h3>
+              <ul id="r-acc"></ul>
+              <h3>PLAAFP starter</h3>
+              <p id="r-plaafp"></p>
+              <div class="cta-row">
+                <button class="btn btn-secondary" type="button" id="copy">Copy all</button>
+              </div>
+              <div class="upsell">
+                <strong>That’s 1 goal. The Vault has 540+.</strong>
+                <p style="margin:6px 0 12px">Hand-written by a TVI/COMS across all 9 ECC areas, plus PLAAFP Power Packs, service-minute justification scripts, and the O&amp;M Assessment Framework. Ready for your next IEP meeting.</p>
+                <a class="btn btn-primary" data-link="pro">Get the Pro Bundle ($147)</a>
+                <a class="btn btn-secondary" data-link="leadMagnet">Get the free checklist</a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <p class="note" style="margin-top:28px">AI drafts can be wrong. You are the professional: verify every goal against evaluation data, state guidance, and district forms. Inputs are sent to a third-party AI provider to generate the draft and are not stored by The Vault.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Footer">
+    <div class="container footer-inner">
+      <p><strong>Built by a TVI, for TVIs.</strong></p>
+      <ul class="footer-links">
+        <li><a href="mailto:garrett@thevaultresources.com">garrett@thevaultresources.com</a></li>
+        <li><a data-link="refund">Refund Policy</a></li>
+        <li><a data-link="terms">Terms of Service</a></li>
+        <li><a data-link="accessibility">Accessibility Statement</a></li>
+      </ul>
+      <p class="small">© <span id="year">2026</span> The Vault TVI Toolkit</p>
+    </div>
+  </footer>
+
+  <script src="goal-drafter.js"></script>
+</body>
+</html>
