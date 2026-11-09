@@ -47,12 +47,12 @@ const SYSTEM = `${spec.persona}
 You write professional, practical, ready-to-use content for: ${spec.audience}.
 Rules:
 - Never use real names of students, families, staff, or trademarked assessment names.
-- Use "the student" / "[Student]" / "[Family]" placeholders.
+- Never invent ANY person's name. Use placeholders: "the student" / "[Student]" / "[Family]" / "[Your Name]" / "[School]".
 - Be specific, measurable where relevant, and realistic.
 - Every item must be different from the others.
 Reply with ONLY a JSON array of objects with exactly these keys: ${keys.join(", ")}.`;
 
-const BATCH = spec.batchSize || 8;
+const BATCH = spec.batchSize || 5;
 const norm = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
 for (const section of spec.sections) {

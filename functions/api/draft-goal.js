@@ -126,7 +126,7 @@ export function providers(env) {
     });
   }
   if (env.GEMINI_API_KEY) {
-    list.push({ name: "gemini", run: (m) => openAICompatible("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", env.GEMINI_API_KEY, env.GEMINI_MODEL || "gemini-2.5-flash", m) });
+    list.push({ name: "gemini", run: (m) => openAICompatible("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", env.GEMINI_API_KEY, env.GEMINI_MODEL || "gemini-3.6-flash", m) });
   }
   if (env.GROQ_API_KEY) {
     list.push({ name: "groq", run: (m) => openAICompatible("https://api.groq.com/openai/v1/chat/completions", env.GROQ_API_KEY, env.GROQ_MODEL || "llama-3.3-70b-versatile", m) });

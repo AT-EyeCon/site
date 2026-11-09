@@ -50,7 +50,7 @@ export function parse(text) {
 
 export function providers(env) {
   const list = [];
-  if (env.GEMINI_API_KEY) list.push({ name: "gemini", url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", key: env.GEMINI_API_KEY, model: env.GEMINI_VISION_MODEL || "gemini-2.5-flash" });
+  if (env.GEMINI_API_KEY) list.push({ name: "gemini", url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", key: env.GEMINI_API_KEY, model: env.GEMINI_VISION_MODEL || "gemini-3.6-flash" });
   if (env.MISTRAL_API_KEY) list.push({ name: "mistral", url: "https://api.mistral.ai/v1/chat/completions", key: env.MISTRAL_API_KEY, model: env.MISTRAL_VISION_MODEL || "mistral-small-latest" });
   if (env.OPENROUTER_API_KEY && env.OPENROUTER_VISION_MODEL) list.push({ name: "openrouter", url: "https://openrouter.ai/api/v1/chat/completions", key: env.OPENROUTER_API_KEY, model: env.OPENROUTER_VISION_MODEL });
   return list;
