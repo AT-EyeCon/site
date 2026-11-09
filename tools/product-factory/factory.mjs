@@ -100,9 +100,9 @@ fs.writeFileSync(path.join(outDir, "product.txt"),
 
 fs.writeFileSync(path.join(outDir, "product.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>${esc(spec.title)}</title><style>
-body{font:16pt/1.5 Arial,Helvetica,sans-serif;color:#000;max-width:8in;margin:0 auto;padding:.5in}
+body{font:13.5pt/1.4 Arial,Helvetica,sans-serif;color:#000;max-width:8in;margin:0 auto;padding:.5in}
 h1{font-size:28pt;margin:0}h2{font-size:20pt;border-bottom:3px solid #000;padding-bottom:4px;margin-top:36pt;break-before:page}
-.item{border:2px solid #000;border-radius:8px;padding:12pt;margin:12pt 0;break-inside:avoid}
+.item{border:2px solid #000;border-radius:8px;padding:8pt 12pt;margin:8pt 0;break-inside:avoid}.item p{margin:3pt 0}
 .label{font-weight:700}.cover{height:9in;display:flex;flex-direction:column;justify-content:center}
 .foot{font-size:11pt;margin-top:24pt}@page{margin:.6in}
 </style></head><body>
