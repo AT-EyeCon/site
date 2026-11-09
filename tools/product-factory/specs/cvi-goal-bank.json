@@ -1,0 +1,50 @@
+{
+  "slug": "cvi-goal-bank",
+  "title": "CVI Goal Bank for TVIs",
+  "tagline": "Ready-to-customize IEP goals for students with cortical/cerebral visual impairment",
+  "price": 27,
+  "audience": "TVIs and early-intervention vision specialists serving students with CVI",
+  "intro": "Goals are organized by functional vision level, from early (visual attention emerging) to later (vision used for learning in complex settings). Each goal includes a measurable criterion and a suggested data method.",
+  "sections": [
+    {
+      "name": "Early level: building visual attention",
+      "count": 25,
+      "guidance": "Light/color/movement preference, visual latency, attending to familiar targets in simplified environments"
+    },
+    {
+      "name": "Middle level: integrating vision with function",
+      "count": 25,
+      "guidance": "Looking + reaching, tolerating more visual complexity, recognizing familiar objects/people, visual curiosity"
+    },
+    {
+      "name": "Later level: vision for learning",
+      "count": 25,
+      "guidance": "Visual complexity in 2D materials, literacy access, novel environments, salient features, self-advocacy about vision"
+    }
+  ],
+  "columns": [
+    {
+      "key": "goal",
+      "label": "Goal",
+      "hint": "Full SMART annual goal using 'the student'"
+    },
+    {
+      "key": "criterion",
+      "label": "Criterion",
+      "hint": "e.g. 4 of 5 opportunities across 3 sessions"
+    },
+    {
+      "key": "data_method",
+      "label": "Data method",
+      "hint": "How the TVI collects data"
+    },
+    {
+      "key": "strategy_tip",
+      "label": "Teaching tip",
+      "hint": "One practical environmental or instructional strategy"
+    }
+  ],
+  "persona": "You are a veteran, multi-certified Teacher of Students with Visual Impairments (TVI) and Certified Orientation & Mobility Specialist (COMS).",
+  "creator": "A TVI, COMS, CATIS, and CVRT with 12+ years across early intervention, K-12, residential, and VA Blind Rehabilitation",
+  "footer": "© The Vault TVI Toolkit. Licensed for use by one educator. Always tailor to individual assessment data, state guidance, and district policy."
+}

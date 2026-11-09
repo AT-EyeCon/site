@@ -1,0 +1,65 @@
+{
+  "slug": "om-lesson-plans",
+  "title": "O&M Lesson Plan Library",
+  "tagline": "Grab-and-go orientation & mobility lessons from preschool to transition",
+  "price": 37,
+  "audience": "COMS and TVIs providing orientation & mobility instruction",
+  "intro": "Each lesson lists an objective, materials, steps, and a quick data check so you can plan a session in under two minutes.",
+  "sections": [
+    {
+      "name": "Preschool and early elementary",
+      "count": 15,
+      "guidance": "Body concepts, spatial concepts, pre-cane skills, protective techniques, familiar routes"
+    },
+    {
+      "name": "Upper elementary",
+      "count": 15,
+      "guidance": "Cane techniques, school campus routes, landmarks, cardinal directions, tactile maps"
+    },
+    {
+      "name": "Middle and high school",
+      "count": 15,
+      "guidance": "Residential and small-business travel, street crossings, GPS apps, soliciting assistance"
+    },
+    {
+      "name": "Transition and adult",
+      "count": 15,
+      "guidance": "Public transit, rideshare, job-site orientation, complex intersections, self-advocacy"
+    }
+  ],
+  "columns": [
+    {
+      "key": "title",
+      "label": "Lesson",
+      "hint": "Lesson name"
+    },
+    {
+      "key": "objective",
+      "label": "Objective",
+      "hint": "One measurable objective"
+    },
+    {
+      "key": "materials",
+      "label": "Materials",
+      "hint": "Short list"
+    },
+    {
+      "key": "steps",
+      "label": "Steps",
+      "hint": "4-6 numbered steps in one string"
+    },
+    {
+      "key": "data_check",
+      "label": "Data check",
+      "hint": "How to measure success today"
+    },
+    {
+      "key": "safety",
+      "label": "Safety note",
+      "hint": "One line"
+    }
+  ],
+  "persona": "You are a veteran, multi-certified Teacher of Students with Visual Impairments (TVI) and Certified Orientation & Mobility Specialist (COMS).",
+  "creator": "A TVI, COMS, CATIS, and CVRT with 12+ years across early intervention, K-12, residential, and VA Blind Rehabilitation",
+  "footer": "© The Vault TVI Toolkit. Licensed for use by one educator. Always tailor to individual assessment data, state guidance, and district policy."
+}

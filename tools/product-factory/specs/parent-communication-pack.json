@@ -1,0 +1,60 @@
+{
+  "slug": "parent-communication-pack",
+  "title": "TVI Family Communication Pack",
+  "tagline": "Plain-language letters and emails TVIs send to families all year",
+  "price": 27,
+  "audience": "TVIs and O&M specialists communicating with parents and caregivers",
+  "intro": "Copy, personalize the [brackets], and send. Every template is written at a family-friendly reading level and avoids jargon or explains it.",
+  "sections": [
+    {
+      "name": "Start of year and introductions",
+      "count": 10,
+      "guidance": "Introducing the TVI/COMS, explaining vision services, caseload welcome"
+    },
+    {
+      "name": "IEP meetings",
+      "count": 12,
+      "guidance": "Invites, prep questions for families, explaining ECC, post-meeting summaries, service minute changes"
+    },
+    {
+      "name": "Progress and assessments",
+      "count": 12,
+      "guidance": "Progress reports, FVA/LMA explanations, O&M evaluation results, celebrating wins"
+    },
+    {
+      "name": "Home practice and resources",
+      "count": 12,
+      "guidance": "Braille at home, cane use at home, independent living practice, recreation ideas"
+    },
+    {
+      "name": "Tricky conversations",
+      "count": 8,
+      "guidance": "Declining vision, recommending a cane, transition planning, disagreements, missed sessions"
+    }
+  ],
+  "columns": [
+    {
+      "key": "title",
+      "label": "Template",
+      "hint": "Short name of the template"
+    },
+    {
+      "key": "subject",
+      "label": "Email subject",
+      "hint": "Subject line"
+    },
+    {
+      "key": "body",
+      "label": "Message",
+      "hint": "Full message 90-180 words with [Family], [Student], [Date] placeholders"
+    },
+    {
+      "key": "when",
+      "label": "When to send",
+      "hint": "One line"
+    }
+  ],
+  "persona": "You are a veteran, multi-certified Teacher of Students with Visual Impairments (TVI) and Certified Orientation & Mobility Specialist (COMS).",
+  "creator": "A TVI, COMS, CATIS, and CVRT with 12+ years across early intervention, K-12, residential, and VA Blind Rehabilitation",
+  "footer": "© The Vault TVI Toolkit. Licensed for use by one educator. Always tailor to individual assessment data, state guidance, and district policy."
+}

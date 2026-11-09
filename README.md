@@ -1,7 +1,11 @@
 # The Vault, TVI Toolkit: site
 
 Static site on **Cloudflare Pages**. Checkout runs through **Payhip**.
-It includes a free AI **Goal Drafter** (`/goal-drafter.html`) that brings TVIs in and points them to the $147 Pro Bundle.
+Two free AI tools bring TVIs in and point them to the $147 Pro Bundle:
+- **Goal Drafter** (`/goal-drafter.html`): free on Cloudflare Workers AI
+- **Image Describer** (`/describe.html`): needs a free `GEMINI_API_KEY` secret (Cloudflare has no strong free vision model)
+
+Plus **`tools/product-factory/`**: drafts new $27 products with free AI (see its README).
 
 ## Go-live checklist (about 20 min)
 
@@ -11,7 +15,8 @@ It includes a free AI **Goal Drafter** (`/goal-drafter.html`) that brings TVIs i
 3. **Optional backups** if Cloudflare's free quota runs out. Add these as *Secrets* (Settings → Variables and Secrets):
    `GEMINI_API_KEY` (aistudio.google.com), `GROQ_API_KEY` (console.groq.com), `OPENROUTER_API_KEY` (openrouter.ai).
    The drafter tries them in order: Cloudflare → Gemini → Groq → OpenRouter.
-4. **Rate limiting.** Cloudflare → Security → WAF → Rate limiting rule: path `/api/draft-goal`, 10 requests/min per IP.
+   **The Image Describer requires `GEMINI_API_KEY`.** `MISTRAL_API_KEY` is an optional backup.
+4. **Rate limiting.** Cloudflare → Security → WAF → Rate limiting rule: paths `/api/draft-goal` and `/api/describe-image`, 10 requests/min per IP.
 5. **Add your product image** at `assets/mockup-tvi-toolkit-pro.png` (it's hidden until the file exists).
 6. Deploy, open `/goal-drafter.html`, and draft one goal to confirm.
 

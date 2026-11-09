@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free Image Describer for TVIs | The Vault</title>
+  <meta name="description" content="Free AI tool for TVIs: upload a worksheet, diagram, or chart and get alt text, an extended description, and tactile graphic tips for students with visual impairments." />
+  <meta property="og:title" content="Free Image Describer for TVIs" />
+  <meta property="og:description" content="Worksheet image → alt text, extended description, and tactile graphic tips in seconds." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="config.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="brand-name" href="/">The Vault, TVI Toolkit</a>
+        <span class="brand-tagline">Built by a TVI, for TVIs.</span>
+      </div>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="goal-drafter.html">Goal Drafter</a>
+        <a href="/#inside">What’s Inside</a>
+        <a href="/#pricing">Pricing</a>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn-primary" data-link="pro">Get the Pro Bundle ($147)</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" aria-labelledby="tool-title">
+      <div class="container">
+        <span class="badge">FREE TOOL</span>
+        <h1 id="tool-title">Image Describer for TVIs</h1>
+        <p class="lead">Upload a worksheet, diagram, map, or chart. Get alt text, a full description in reading order, the text transcribed, and tactile graphic tips.</p>
+
+        <div class="alert alert-warn" role="note">
+          <strong>Crop out student names and faces first.</strong> The image is sent to a third-party AI to be described and is not stored by The Vault.
+        </div>
+
+        <div class="tool">
+          <form id="describer" class="form-grid" novalidate>
+            <div>
+              <label for="file">Image <span class="hint">PNG, JPG, or WebP. A phone photo of a worksheet works.</span></label>
+              <input id="file" name="file" type="file" accept="image/png,image/jpeg,image/webp" required />
+            </div>
+            <img id="preview" alt="" hidden style="max-height:260px;border:2px solid var(--border);border-radius:10px" />
+            <div>
+              <label for="purpose">What kind of image is it?</label>
+              <select id="purpose" required></select>
+            </div>
+            <div>
+              <label for="grade">Grade level</label>
+              <select id="grade" required></select>
+            </div>
+            <div id="error" class="alert alert-err" role="alert" hidden></div>
+            <div class="cta-row"><button id="submit" class="btn btn-primary" type="submit">Describe this image</button></div>
+            <p class="counter" id="remaining" aria-live="polite"></p>
+          </form>
+
+          <section class="output" id="output" aria-labelledby="out-title" aria-live="polite" aria-busy="false">
+            <h2 id="out-title" style="font-size:1.3rem">Description</h2>
+            <p class="note" id="placeholder">Your description appears here. Always check it against the original before using it with a student.</p>
+            <div id="result" hidden>
+              <h3>Alt text</h3>
+              <p class="goal" id="r-alt"></p>
+              <h3>Extended description</h3>
+              <div id="r-ext"></div>
+              <div id="r-text-wrap"><h3>Text in the image</h3><p id="r-text" style="white-space:pre-wrap"></p></div>
+              <h3>Tactile graphic tips</h3>
+              <ul id="r-tips"></ul>
+              <h3>Teaching notes</h3>
+              <p id="r-notes"></p>
+              <div class="cta-row"><button class="btn btn-secondary" type="button" id="copy">Copy all</button></div>
+              <div class="upsell">
+                <strong>Saved you 15 minutes? The Vault saves you hours every IEP season.</strong>
+                <p style="margin:6px 0 12px">540+ ECC-aligned SMART goals, PLAAFP Power Packs, service-minute justification scripts, and more, written by a TVI/COMS.</p>
+                <a class="btn btn-primary" data-link="pro">Get the Pro Bundle ($147)</a>
+                <a class="btn btn-secondary" data-link="leadMagnet">Get the free checklist</a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <p class="note" style="margin-top:28px">AI descriptions can miss or misread details. Review every description before sharing it with a student.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Footer">
+    <div class="container footer-inner">
+      <p><strong>Built by a TVI, for TVIs.</strong></p>
+      <ul class="footer-links">
+        <li><a href="mailto:garrett@thevaultresources.com">garrett@thevaultresources.com</a></li>
+        <li><a data-link="refund">Refund Policy</a></li>
+        <li><a data-link="terms">Terms of Service</a></li>
+        <li><a data-link="accessibility">Accessibility Statement</a></li>
+      </ul>
+      <p class="small">© <span id="year">2026</span> The Vault TVI Toolkit</p>
+    </div>
+  </footer>
+
+  <script src="describe.js"></script>
+</body>
+</html>
